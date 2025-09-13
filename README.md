@@ -27,7 +27,7 @@ A modern web application for tracking purchased products and managing detailed r
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/product-tracker.git
+git clone https://github.com/maxwharris/produck.git
 cd product-tracker
 ```
 
