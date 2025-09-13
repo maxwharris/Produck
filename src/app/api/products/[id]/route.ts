@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
 import dbConnect from '@/lib/mongodb'
 import Product from '@/models/Product'
 
@@ -7,8 +9,18 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     await dbConnect()
-    const product = await Product.findById(params.id)
+    const product = await Product.findOne({
+      _id: params.id,
+      userId: session.user.id
+    }).populate('userId', 'name email')
+
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     }
@@ -23,9 +35,20 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     await dbConnect()
     const body = await request.json()
-    const product = await Product.findByIdAndUpdate(params.id, body, { new: true })
+    const product = await Product.findOneAndUpdate(
+      { _id: params.id, userId: session.user.id },
+      body,
+      { new: true }
+    ).populate('userId', 'name email')
+
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     }
@@ -40,8 +63,18 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
     await dbConnect()
-    const product = await Product.findByIdAndDelete(params.id)
+    const product = await Product.findOneAndDelete({
+      _id: params.id,
+      userId: session.user.id
+    })
+
     if (!product) {
       return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     }
