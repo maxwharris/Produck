@@ -202,6 +202,17 @@ export default function AddProductScreen() {
     try {
       const parsedPurchaseDate = parseDateInput(purchaseDate);
 
+      // Upload images if any were selected
+      let uploadedPhotoUrls: string[] = [];
+      if (images.length > 0) {
+        try {
+          uploadedPhotoUrls = await apiService.uploadImages(images);
+        } catch (uploadError) {
+          console.error('Error uploading images:', uploadError);
+          Alert.alert('Warning', 'Images failed to upload, but product will be created without them.');
+        }
+      }
+
       const productData = {
         name,
         category,
@@ -211,8 +222,8 @@ export default function AddProductScreen() {
         rating: parseInt(rating),
         blurb,
         timeUsed,
-        photos: [], // TODO: Add photo upload functionality
-        userId: user.id, // Include the current user's ID
+        photos: uploadedPhotoUrls,
+        userId: user.id,
       };
 
       await apiService.createProduct(productData);

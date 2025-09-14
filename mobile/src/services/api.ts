@@ -135,6 +135,37 @@ class ApiService {
     return users.length > 0 ? users[0] : null;
   }
 
+  // Upload
+  async uploadImages(images: string[]): Promise<string[]> {
+    const formData = new FormData();
+
+    for (const imageUri of images) {
+      const filename = imageUri.split('/').pop() || 'image.jpg';
+      const file = {
+        uri: imageUri,
+        name: filename,
+        type: 'image/jpeg',
+      } as any;
+
+      formData.append('files', file);
+    }
+
+    const response = await fetch(`${API_BASE_URL}/api/upload`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Upload failed: ${response.status}`);
+    }
+
+    const result = await response.json();
+    return result.urls;
+  }
+
   // Reviews
   async getReviews(params: { productId?: string }): Promise<Review[]> {
     const searchParams = new URLSearchParams();
