@@ -129,7 +129,7 @@ export default function AddProductScreen() {
       const newCategory = await apiService.createCategory({
         name: newCategoryName.trim(),
         color: newCategoryColor,
-      });
+      }, user.id);
 
       setUserCategories(prev => [...prev, newCategory]);
       setCategory(newCategory.name);
@@ -139,6 +139,41 @@ export default function AddProductScreen() {
     } catch (error: any) {
       Alert.alert('Error', error.message || 'Failed to create category');
     }
+  };
+
+  const parseDateInput = (dateString: string): string => {
+    const today = new Date();
+    const lowerInput = dateString.toLowerCase().trim();
+
+    // Handle common date inputs
+    if (lowerInput === 'today') {
+      return today.toISOString().split('T')[0];
+    } else if (lowerInput === 'yesterday') {
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      return yesterday.toISOString().split('T')[0];
+    } else if (lowerInput === 'now') {
+      return today.toISOString().split('T')[0];
+    }
+
+    // Check if it's already a valid date format
+    const date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      return date.toISOString().split('T')[0];
+    }
+
+    // If it's a partial date like "2024-01", add current day
+    if (/^\d{4}-\d{2}$/.test(dateString)) {
+      return `${dateString}-01`;
+    }
+
+    // If it's just a year, add current month and day
+    if (/^\d{4}$/.test(dateString)) {
+      return `${dateString}-01-01`;
+    }
+
+    // Return as-is if we can't parse it (let backend handle validation)
+    return dateString;
   };
 
   const handleSubmit = async () => {
@@ -164,12 +199,14 @@ export default function AddProductScreen() {
 
     setLoading(true);
     try {
+      const parsedPurchaseDate = parseDateInput(purchaseDate);
+
       const productData = {
         name,
         category,
         cost: parseFloat(cost),
         description,
-        purchaseDate,
+        purchaseDate: parsedPurchaseDate,
         rating: parseInt(rating),
         blurb,
         timeUsed,
@@ -314,7 +351,7 @@ export default function AddProductScreen() {
               style={styles.input}
               value={purchaseDate}
               onChangeText={setPurchaseDate}
-              placeholder="YYYY-MM-DD"
+              placeholder="YYYY-MM-DD or 'today', 'yesterday'"
             />
           </View>
 

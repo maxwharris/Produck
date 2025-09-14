@@ -115,10 +115,13 @@ class ApiService {
     return this.request(`/api/categories/${id}`);
   }
 
-  async createCategory(categoryData: { name: string; color: string }): Promise<Category> {
+  async createCategory(categoryData: { name: string; color: string }, userId: string): Promise<Category> {
     return this.request('/api/categories', {
       method: 'POST',
-      body: JSON.stringify(categoryData),
+      body: JSON.stringify({
+        ...categoryData,
+        userId
+      }),
     });
   }
 
