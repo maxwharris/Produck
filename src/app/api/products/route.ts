@@ -42,15 +42,12 @@ export async function GET(request: NextRequest) {
     }
 
     const products = await Product.find(query)
-      .populate('userId', 'name email')
+      .populate({
+        path: 'userId',
+        select: 'name email',
+        options: { strictPopulate: false } // Allow missing references
+      })
       .sort({ createdAt: -1 })
-
-    // If filtering by userId, ensure the user exists
-    if (userId) {
-      // Filter out any products where userId population failed
-      const validProducts = products.filter(product => product.userId);
-      return NextResponse.json(validProducts);
-    }
 
     return NextResponse.json(products)
   } catch (error) {

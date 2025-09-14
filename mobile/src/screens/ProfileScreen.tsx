@@ -33,6 +33,8 @@ export default function ProfileScreen() {
       setUserProductsCount(products.length);
     } catch (error) {
       console.error('Error fetching user products count:', error);
+      // Set count to 0 on error to avoid showing wrong data
+      setUserProductsCount(0);
     }
   };
 

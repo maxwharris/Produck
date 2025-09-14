@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// Import API_BASE_URL from the api service
+const API_BASE_URL = __DEV__
+  ? 'http://192.168.1.165:3000' // Replace with your computer's actual IP
+  : 'https://your-production-api.com'; // For production
+
 interface User {
   id: string;
   name: string;
@@ -53,18 +58,32 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual login API call
-      // For now, simulate login with mock data
+      // For now, simulate login and fetch user data from database
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Use a consistent user ID that exists in the database
-      const mockUser: User = {
-        id: '677f5b8b8c8b8b8b8b8b8b8b', // Use a different user ID
-        name: 'Alex Johnson',
+      // First, try to find an existing user with this email
+      // If not found, use a default user ID that exists
+      const existingUsers = await fetch(`${API_BASE_URL}/api/users?search=${encodeURIComponent(email.split('@')[0])}`)
+        .then(res => res.json())
+        .catch(() => []);
+
+      let userId = '677f5b8b8c8b8b8b8b8b8b8b'; // Default fallback ID
+      let userName = 'Demo User';
+
+      if (existingUsers.length > 0) {
+        // Use the first matching user
+        userId = existingUsers[0]._id;
+        userName = existingUsers[0].name;
+      }
+
+      const userData: User = {
+        id: userId,
+        name: userName,
         email: email,
       };
 
-      setUser(mockUser);
-      await AsyncStorage.setItem('user', JSON.stringify(mockUser));
+      setUser(userData);
+      await AsyncStorage.setItem('user', JSON.stringify(userData));
       return true;
     } catch (error) {
       console.error('Login error:', error);
@@ -79,14 +98,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Use a consistent user ID that exists in the database
-      const mockUser: User = {
-        id: '68c652806029388b2ec02548', // Use an existing user ID from database
+      const userData: User = {
+        id: '677f5b8b8c8b8b8b8b8b8b8b', // Use existing user ID
         name: name,
         email: email,
       };
 
-      setUser(mockUser);
-      await AsyncStorage.setItem('user', JSON.stringify(mockUser));
+      setUser(userData);
+      await AsyncStorage.setItem('user', JSON.stringify(userData));
       return true;
     } catch (error) {
       console.error('Registration error:', error);
