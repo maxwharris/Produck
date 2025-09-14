@@ -13,6 +13,10 @@ import ProductDetailScreen from './src/screens/ProductDetailScreen';
 import UserProfileScreen from './src/screens/UserProfileScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
+import MyProductsScreen from './src/screens/MyProductsScreen';
+import AddProductScreen from './src/screens/AddProductScreen';
+import CategoriesScreen from './src/screens/CategoriesScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -157,6 +161,26 @@ function ProfileStack() {
         name="ProfileMain"
         component={ProfileScreen}
         options={{ title: 'Profile' }}
+      />
+      <Stack.Screen
+        name="MyProducts"
+        component={MyProductsScreen}
+        options={{ title: 'My Products' }}
+      />
+      <Stack.Screen
+        name="AddProduct"
+        component={AddProductScreen}
+        options={{ title: 'Add Product' }}
+      />
+      <Stack.Screen
+        name="Categories"
+        component={CategoriesScreen}
+        options={{ title: 'Categories' }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: 'Settings' }}
       />
       <Stack.Screen
         name="ProductDetail"

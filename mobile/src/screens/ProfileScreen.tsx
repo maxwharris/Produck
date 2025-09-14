@@ -50,8 +50,7 @@ export default function ProfileScreen() {
       subtitle: 'Manage your shared products',
       icon: '📦',
       onPress: () => {
-        // Navigate to user's products
-        console.log('Navigate to my products');
+        (navigation as any).navigate('MyProducts');
       },
     },
     {
@@ -59,17 +58,15 @@ export default function ProfileScreen() {
       subtitle: 'Share a new product experience',
       icon: '➕',
       onPress: () => {
-        // Navigate to add product screen
-        console.log('Navigate to add product');
+        (navigation as any).navigate('AddProduct');
       },
     },
     {
       title: 'Categories',
-      subtitle: 'Manage your product categories',
+      subtitle: 'Browse products by category',
       icon: '🏷️',
       onPress: () => {
-        // Navigate to categories management
-        console.log('Navigate to categories');
+        (navigation as any).navigate('Categories');
       },
     },
     {
@@ -77,8 +74,7 @@ export default function ProfileScreen() {
       subtitle: 'App preferences and account settings',
       icon: '⚙️',
       onPress: () => {
-        // Navigate to settings
-        console.log('Navigate to settings');
+        (navigation as any).navigate('Settings');
       },
     },
     {
@@ -86,8 +82,7 @@ export default function ProfileScreen() {
       subtitle: 'Get help or contact support',
       icon: '❓',
       onPress: () => {
-        // Navigate to help
-        console.log('Navigate to help');
+        Alert.alert('Help & Support', 'Contact support@productsocial.com for assistance');
       },
     },
   ];
