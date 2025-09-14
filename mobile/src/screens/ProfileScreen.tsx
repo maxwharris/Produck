@@ -10,11 +10,31 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
+import { apiService } from '../services/api';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [userProductsCount, setUserProductsCount] = useState(0);
+
+  useEffect(() => {
+    if (user) {
+      fetchUserProductsCount();
+    }
+  }, [user]);
+
+  const fetchUserProductsCount = async () => {
+    if (!user) return;
+
+    try {
+      // Fetch user's products to get the count
+      const products = await apiService.getProducts({ userId: user.id });
+      setUserProductsCount(products.length);
+    } catch (error) {
+      console.error('Error fetching user products count:', error);
+    }
+  };
 
   const handleSignOut = () => {
     Alert.alert(
@@ -108,7 +128,7 @@ export default function ProfileScreen() {
         <Text style={styles.userEmail}>{user.email}</Text>
         <View style={styles.statsContainer}>
           <View style={styles.stat}>
-            <Text style={styles.statNumber}>0</Text>
+            <Text style={styles.statNumber}>{userProductsCount}</Text>
             <Text style={styles.statLabel}>Products</Text>
           </View>
           <View style={styles.stat}>

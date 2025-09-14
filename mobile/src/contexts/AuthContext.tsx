@@ -56,9 +56,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // For now, simulate login with mock data
       await new Promise(resolve => setTimeout(resolve, 1000));
 
+      // Use a consistent user ID that exists in the database
       const mockUser: User = {
-        id: '1',
-        name: 'John Doe',
+        id: '68c652806029388b2ec02548', // Use an existing user ID from database
+        name: 'Demo User',
         email: email,
       };
 
@@ -77,8 +78,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // For now, simulate registration
       await new Promise(resolve => setTimeout(resolve, 1000));
 
+      // Use a consistent user ID that exists in the database
       const mockUser: User = {
-        id: Date.now().toString(),
+        id: '68c652806029388b2ec02548', // Use an existing user ID from database
         name: name,
         email: email,
       };
