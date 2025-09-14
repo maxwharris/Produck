@@ -4,7 +4,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', '192.168.1.165'],
   },
 }
 

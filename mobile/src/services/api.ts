@@ -1,4 +1,9 @@
-const API_BASE_URL = 'http://localhost:3000'; // Update this for production
+// Get the computer's IP address dynamically
+// For development, replace with your computer's IP address
+// You can find this in the Expo terminal output (e.g., exp://192.168.1.165:8081)
+const API_BASE_URL = __DEV__
+  ? 'http://192.168.1.165:3000' // Replace with your computer's actual IP
+  : 'https://your-production-api.com'; // For production
 
 export interface Product {
   _id: string;

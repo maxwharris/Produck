@@ -6,19 +6,20 @@ import Review from '@/models/Review'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     await dbConnect()
     const { searchParams } = new URL(request.url)
     const productId = searchParams.get('productId')
 
-    let query: any = { userId: session.user.id }
+    let query: any = {}
     if (productId) {
       query.productId = productId
+    } else {
+      // If no productId specified, require authentication for user's own reviews
+      const session = await getServerSession(authOptions)
+      if (!session?.user?.id) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+      }
+      query.userId = session.user.id as string
     }
 
     const reviews = await Review.find(query)
@@ -43,7 +44,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const review = new Review({
       ...body,
-      userId: session.user.id
+      userId: session.user.id as string
     })
     await review.save()
     await review.populate('productId')
