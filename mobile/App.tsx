@@ -16,6 +16,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import RegisterScreen from './src/screens/RegisterScreen';
 import MyProductsScreen from './src/screens/MyProductsScreen';
 import AddProductScreen from './src/screens/AddProductScreen';
+import EditProductScreen from './src/screens/EditProductScreen';
 import CategoriesScreen from './src/screens/CategoriesScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
@@ -172,6 +173,11 @@ function ProfileStack() {
         name="AddProduct"
         component={AddProductScreen}
         options={{ title: 'Add Produck' }}
+      />
+      <Stack.Screen
+        name="EditProduct"
+        component={EditProductScreen}
+        options={{ title: 'Edit Produck' }}
       />
       <Stack.Screen
         name="Categories"
