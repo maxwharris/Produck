@@ -21,8 +21,22 @@
         "backgroundColor": "#F59E0B"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ]
     },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share product images.",
+          "cameraPermission": "The app accesses your camera to let you take product photos."
+        }
+      ]
+    ],
     "web": {
       "favicon": "./assets/favicon.png"
     },

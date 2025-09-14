@@ -103,8 +103,12 @@ class ApiService {
   }
 
   // Categories
-  async getCategories(): Promise<Category[]> {
-    return this.request('/api/categories');
+  async getCategories(params?: { userId?: string }): Promise<Category[]> {
+    const searchParams = new URLSearchParams();
+    if (params?.userId) searchParams.append('userId', params.userId);
+
+    const query = searchParams.toString();
+    return this.request(`/api/categories${query ? `?${query}` : ''}`);
   }
 
   async getCategory(id: string): Promise<Category> {

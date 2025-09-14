@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
+import CustomTabBar from './src/components/CustomTabBar';
 import HomeScreen from './src/screens/HomeScreen';
 import DiscoverScreen from './src/screens/DiscoverScreen';
 import SearchScreen from './src/screens/SearchScreen';
@@ -199,12 +200,8 @@ function ProfileStack() {
 function TabNavigator() {
   return (
     <Tab.Navigator
+      tabBar={(props) => <CustomTabBar {...props} />}
       screenOptions={{
-        tabBarActiveTintColor: '#F59E0B', // Yellow for rubber duck theme
-        tabBarInactiveTintColor: '#92400E', // Darker brown/orange for inactive
-        tabBarStyle: {
-          backgroundColor: '#FEF3C7', // Light yellow background
-        },
         headerShown: false, // Hide headers since we have stack headers
       }}
     >

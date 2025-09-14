@@ -7,8 +7,17 @@ import Category from '@/models/Category'
 export async function GET(request: NextRequest) {
   try {
     await dbConnect()
-    const categories = await Category.find({})
-      .sort({ createdAt: -1 })
+    const { searchParams } = new URL(request.url)
+    const userId = searchParams.get('userId')
+
+    let query: any = {}
+
+    if (userId) {
+      query.userId = userId
+    }
+
+    const categories = await Category.find(query)
+      .sort({ name: 1 })
 
     return NextResponse.json(categories)
   } catch (error) {
@@ -28,7 +37,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const category = new Category({
       ...body,
-      userId: session.user.id as string
+      userId: session.user.id
     })
     await category.save()
 
