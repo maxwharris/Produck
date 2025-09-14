@@ -9,16 +9,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     await dbConnect()
     const product = await Product.findOne({
-      _id: params.id,
-      userId: session.user.id
+      _id: params.id
     }).populate('userId', 'name email')
 
     if (!product) {
@@ -44,7 +37,7 @@ export async function PUT(
     await dbConnect()
     const body = await request.json()
     const product = await Product.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id },
+      { _id: params.id, userId: session.user.id as string },
       body,
       { new: true }
     ).populate('userId', 'name email')
@@ -72,7 +65,7 @@ export async function DELETE(
     await dbConnect()
     const product = await Product.findOneAndDelete({
       _id: params.id,
-      userId: session.user.id
+      userId: session.user.id as string
     })
 
     if (!product) {
