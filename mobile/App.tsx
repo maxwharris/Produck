@@ -27,7 +27,7 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3B82F6',
+          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -38,12 +38,12 @@ function AuthStack() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{ title: 'Sign In' }}
+        options={{ title: 'Sign In to Produck' }}
       />
       <Stack.Screen
         name="Register"
         component={RegisterScreen}
-        options={{ title: 'Create Account' }}
+        options={{ title: 'Join Produck' }}
       />
     </Stack.Navigator>
   );
@@ -54,7 +54,7 @@ function HomeStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3B82F6',
+          backgroundColor: '#F59E0B', // Yellow/amber for rubber duck theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -65,7 +65,7 @@ function HomeStack() {
       <Stack.Screen
         name="HomeMain"
         component={HomeScreen}
-        options={{ title: 'Product Social' }}
+        options={{ title: 'Produck' }}
       />
       <Stack.Screen
         name="ProductDetail"
@@ -86,7 +86,7 @@ function DiscoverStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3B82F6',
+          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -118,7 +118,7 @@ function SearchStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3B82F6',
+          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -129,7 +129,7 @@ function SearchStack() {
       <Stack.Screen
         name="SearchMain"
         component={SearchScreen}
-        options={{ title: 'Search' }}
+        options={{ title: 'Search Produck' }}
       />
       <Stack.Screen
         name="ProductDetail"
@@ -150,7 +150,7 @@ function ProfileStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#3B82F6',
+          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -166,12 +166,12 @@ function ProfileStack() {
       <Stack.Screen
         name="MyProducts"
         component={MyProductsScreen}
-        options={{ title: 'My Products' }}
+        options={{ title: 'My Producks' }}
       />
       <Stack.Screen
         name="AddProduct"
         component={AddProductScreen}
-        options={{ title: 'Add Product' }}
+        options={{ title: 'Add Produck' }}
       />
       <Stack.Screen
         name="Categories"
@@ -186,7 +186,7 @@ function ProfileStack() {
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={{ title: 'Product Details' }}
+        options={{ title: 'Produck Details' }}
       />
       <Stack.Screen
         name="UserProfile"
@@ -201,8 +201,11 @@ function TabNavigator() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#3B82F6',
-        tabBarInactiveTintColor: '#666',
+        tabBarActiveTintColor: '#F59E0B', // Yellow for rubber duck theme
+        tabBarInactiveTintColor: '#92400E', // Darker brown/orange for inactive
+        tabBarStyle: {
+          backgroundColor: '#FEF3C7', // Light yellow background
+        },
         headerShown: false, // Hide headers since we have stack headers
       }}
     >
@@ -255,8 +258,8 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f9fafb' }}>
-        <ActivityIndicator size="large" color="#3b82f6" />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FEF3C7' }}>
+        <ActivityIndicator size="large" color="#F59E0B" />
       </View>
     );
   }
