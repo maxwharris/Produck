@@ -42,7 +42,7 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
       {/* Center floating button */}
       <TouchableOpacity
         style={styles.centerButton}
-        onPress={() => navigation.navigate('AddProduct')}
+        onPress={() => navigation.navigate('Profile', { screen: 'AddProduct' })}
       >
         <Text style={styles.centerButtonText}>+</Text>
       </TouchableOpacity>
