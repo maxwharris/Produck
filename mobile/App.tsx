@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, ActivityIndicator } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import HomeScreen from './src/screens/HomeScreen';
 import DiscoverScreen from './src/screens/DiscoverScreen';
@@ -210,6 +211,9 @@ function TabNavigator() {
         component={HomeStack}
         options={{
           tabBarLabel: 'Home',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="home" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -217,6 +221,9 @@ function TabNavigator() {
         component={DiscoverStack}
         options={{
           tabBarLabel: 'Discover',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="compass" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -224,6 +231,9 @@ function TabNavigator() {
         component={SearchStack}
         options={{
           tabBarLabel: 'Search',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="search" color={color} size={size} />
+          ),
         }}
       />
       <Tab.Screen
@@ -231,6 +241,9 @@ function TabNavigator() {
         component={ProfileStack}
         options={{
           tabBarLabel: 'Profile',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" color={color} size={size} />
+          ),
         }}
       />
     </Tab.Navigator>
