@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     overflow: 'hidden',
-    width: 280, // Fixed width for consistent sizing
-    height: 380, // Fixed height for consistent card sizes
+    width: 240, // Smaller fixed width for mobile screens
+    height: 340, // Adjusted height to maintain proportions
   },
   imageContainer: {
     height: 180,
