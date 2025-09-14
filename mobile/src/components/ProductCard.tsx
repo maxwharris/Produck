@@ -112,6 +112,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     overflow: 'hidden',
+    width: 280, // Fixed width for consistent sizing
+    height: 380, // Fixed height for consistent card sizes
   },
   imageContainer: {
     height: 180,
@@ -133,6 +135,8 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 16,
+    flex: 1,
+    justifyContent: 'space-between',
   },
   title: {
     fontSize: 18,
@@ -178,6 +182,7 @@ const styles = StyleSheet.create({
     color: '#6b7280',
     lineHeight: 20,
     marginBottom: 12,
+    flex: 1,
   },
   viewDetails: {
     fontSize: 14,
