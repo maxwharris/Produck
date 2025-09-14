@@ -9,18 +9,12 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
+  const { user, logout } = useAuth();
   const [loading, setLoading] = useState(false);
-
-  // Mock user data - in a real app, this would come from authentication
-  const user = {
-    name: 'John Doe',
-    email: 'john@example.com',
-    productsCount: 5,
-    joinDate: 'January 2024',
-  };
 
   const handleSignOut = () => {
     Alert.alert(
@@ -34,9 +28,16 @@ export default function ProfileScreen() {
         {
           text: 'Sign Out',
           style: 'destructive',
-          onPress: () => {
-            // Handle sign out logic here
-            console.log('User signed out');
+          onPress: async () => {
+            setLoading(true);
+            try {
+              await logout();
+              // Navigation will automatically switch to auth screens
+            } catch (error) {
+              Alert.alert('Error', 'Failed to sign out. Please try again.');
+            } finally {
+              setLoading(false);
+            }
           },
         },
       ]
@@ -91,6 +92,14 @@ export default function ProfileScreen() {
     },
   ];
 
+  if (!user) {
+    return (
+      <View style={styles.centerContainer}>
+        <Text style={styles.errorText}>User not found</Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView style={styles.container}>
       {/* Profile Header */}
@@ -104,11 +113,11 @@ export default function ProfileScreen() {
         <Text style={styles.userEmail}>{user.email}</Text>
         <View style={styles.statsContainer}>
           <View style={styles.stat}>
-            <Text style={styles.statNumber}>{user.productsCount}</Text>
+            <Text style={styles.statNumber}>0</Text>
             <Text style={styles.statLabel}>Products</Text>
           </View>
           <View style={styles.stat}>
-            <Text style={styles.statNumber}>{user.joinDate.split(' ')[1]}</Text>
+            <Text style={styles.statNumber}>New</Text>
             <Text style={styles.statLabel}>Member</Text>
           </View>
         </View>
@@ -165,6 +174,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f9fafb',
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f9fafb',
+  },
+  errorText: {
+    fontSize: 18,
+    color: '#ef4444',
   },
   header: {
     backgroundColor: '#3b82f6',
