@@ -44,6 +44,14 @@ export async function GET(request: NextRequest) {
     const products = await Product.find(query)
       .populate('userId', 'name email')
       .sort({ createdAt: -1 })
+
+    // If filtering by userId, ensure the user exists
+    if (userId) {
+      // Filter out any products where userId population failed
+      const validProducts = products.filter(product => product.userId);
+      return NextResponse.json(validProducts);
+    }
+
     return NextResponse.json(products)
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch products' }, { status: 500 })

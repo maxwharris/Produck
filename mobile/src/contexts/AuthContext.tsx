@@ -58,8 +58,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       // Use a consistent user ID that exists in the database
       const mockUser: User = {
-        id: '68c652806029388b2ec02548', // Use an existing user ID from database
-        name: 'Demo User',
+        id: '677f5b8b8c8b8b8b8b8b8b8b', // Use a different user ID
+        name: 'Alex Johnson',
         email: email,
       };
 
