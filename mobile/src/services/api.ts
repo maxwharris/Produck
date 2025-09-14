@@ -94,6 +94,7 @@ class ApiService {
     blurb: string;
     photos: string[];
     timeUsed: string;
+    userId: string; // Add userId to product creation
   }): Promise<Product> {
     return this.request('/api/products', {
       method: 'POST',

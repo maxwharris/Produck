@@ -58,6 +58,11 @@ export default function AddProductScreen() {
       return;
     }
 
+    if (!user) {
+      Alert.alert('Error', 'You must be logged in to add a product');
+      return;
+    }
+
     setLoading(true);
     try {
       const productData = {
@@ -70,6 +75,7 @@ export default function AddProductScreen() {
         blurb,
         timeUsed,
         photos: [], // TODO: Add photo upload functionality
+        userId: user.id, // Include the current user's ID
       };
 
       await apiService.createProduct(productData);

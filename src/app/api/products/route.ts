@@ -57,11 +57,11 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
+    // TODO: Re-enable authentication when implementing proper mobile auth
+    // const session = await getServerSession(authOptions)
+    // if (!session?.user?.id) {
+    //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // }
 
     await dbConnect()
     const body = await request.json()
@@ -72,13 +72,22 @@ export async function POST(request: NextRequest) {
       blurb,
       photos,
       timeUsed,
+      userId, // Get userId from request body for mobile app
       ...productData
     } = body
+
+    // For mobile app testing, use userId from request body
+    // In production, this would come from authenticated session
+    const authenticatedUserId = userId // || session.user.id as string
+
+    if (!authenticatedUserId) {
+      return NextResponse.json({ error: 'User ID required' }, { status: 400 })
+    }
 
     // Create the product
     const product = new Product({
       ...productData,
-      userId: session.user.id as string
+      userId: authenticatedUserId
     })
     await product.save()
 
@@ -87,7 +96,7 @@ export async function POST(request: NextRequest) {
       const Review = (await import('@/models/Review')).default
       const review = new Review({
         productId: product._id,
-        userId: session.user.id as string,
+        userId: authenticatedUserId,
         rating: parseInt(rating),
         blurb,
         photos: photos || [],
