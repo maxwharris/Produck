@@ -5,6 +5,16 @@ const API_BASE_URL = __DEV__
   ? 'http://192.168.1.165:3000' // Replace with your computer's actual IP
   : 'https://your-production-api.com'; // For production
 
+// Helper function to convert relative URLs to full URLs
+export const getFullImageUrl = (relativeUrl: string): string => {
+  if (relativeUrl.startsWith('http')) {
+    return relativeUrl; // Already a full URL
+  }
+  // Remove leading slash and construct full URL
+  const cleanPath = relativeUrl.startsWith('/') ? relativeUrl.slice(1) : relativeUrl;
+  return `${API_BASE_URL}/${cleanPath}`;
+};
+
 export interface Product {
   _id: string;
   name: string;

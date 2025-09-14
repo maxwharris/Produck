@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
-import { apiService, Product, Review } from '../services/api';
+import { apiService, getFullImageUrl, Product, Review } from '../services/api';
 
 export default function ProductDetailScreen() {
   const route = useRoute();
@@ -74,7 +74,7 @@ export default function ProductDetailScreen() {
       <View style={styles.imageContainer}>
         {review?.photos && review.photos.length > 0 ? (
           <Image
-            source={{ uri: review.photos[0] }}
+            source={{ uri: getFullImageUrl(review.photos[0]) }}
             style={styles.image}
             resizeMode="cover"
           />

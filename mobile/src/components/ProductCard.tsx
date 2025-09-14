@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { apiService, Product, Review } from '../services/api';
+import { apiService, getFullImageUrl, Product, Review } from '../services/api';
 
 interface ProductCardProps {
   product: Product;
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <View style={styles.imageContainer}>
         {review?.photos && review.photos.length > 0 ? (
           <Image
-            source={{ uri: review.photos[0] }}
+            source={{ uri: getFullImageUrl(review.photos[0]) }}
             style={styles.image}
             resizeMode="cover"
           />
