@@ -102,6 +102,29 @@ class ApiService {
     });
   }
 
+  async updateProduct(id: string, productData: {
+    name?: string;
+    category?: string;
+    purchaseDate?: string;
+    cost?: number;
+    description?: string;
+    rating?: number;
+    blurb?: string;
+    photos?: string[];
+    timeUsed?: string;
+  }): Promise<Product> {
+    return this.request(`/api/products/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(productData),
+    });
+  }
+
+  async deleteProduct(id: string): Promise<void> {
+    return this.request(`/api/products/${id}`, {
+      method: 'DELETE',
+    });
+  }
+
   // Categories
   async getCategories(params?: { userId?: string }): Promise<Category[]> {
     const searchParams = new URLSearchParams();

@@ -44,8 +44,20 @@ export default function MyProductsScreen() {
     fetchUserProducts();
   };
 
+  const handleProductDeleted = () => {
+    fetchUserProducts();
+  };
+
+  const handleProductUpdated = () => {
+    fetchUserProducts();
+  };
+
   const renderProduct = ({ item }: { item: Product }) => (
-    <ProductCard product={item} />
+    <ProductCard
+      product={item}
+      onProductDeleted={handleProductDeleted}
+      onProductUpdated={handleProductUpdated}
+    />
   );
 
   if (loading) {

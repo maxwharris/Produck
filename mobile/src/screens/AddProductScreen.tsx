@@ -19,6 +19,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { apiService, Category } from '../services/api';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddProductScreen() {
   const navigation = useNavigation();
@@ -32,10 +33,13 @@ export default function AddProductScreen() {
   const [category, setCategory] = useState('');
   const [cost, setCost] = useState('');
   const [description, setDescription] = useState('');
-  const [purchaseDate, setPurchaseDate] = useState('');
+  const [purchaseDate, setPurchaseDate] = useState(new Date());
   const [rating, setRating] = useState('');
   const [blurb, setBlurb] = useState('');
   const [timeUsed, setTimeUsed] = useState('');
+
+  // Date picker state
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   // Modal state
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -222,6 +226,13 @@ export default function AddProductScreen() {
     return dateString;
   };
 
+  const onDateChange = (event: any, selectedDate?: Date) => {
+    setShowDatePicker(false);
+    if (selectedDate) {
+      setPurchaseDate(selectedDate);
+    }
+  };
+
   const handleSubmit = async () => {
     if (!name || !category || !cost || !description || !purchaseDate || !rating || !blurb || !timeUsed) {
       Alert.alert('Error', 'Please fill in all fields');
@@ -245,7 +256,8 @@ export default function AddProductScreen() {
 
     setLoading(true);
     try {
-      const parsedPurchaseDate = parseDateInput(purchaseDate);
+      // Convert Date to ISO string for API
+      const purchaseDateString = purchaseDate.toISOString().split('T')[0];
 
       // Upload images if any were selected
       let uploadedPhotoUrls: string[] = [];
@@ -263,7 +275,7 @@ export default function AddProductScreen() {
         category,
         cost: parseFloat(cost),
         description,
-        purchaseDate: parsedPurchaseDate,
+        purchaseDate: purchaseDateString,
         rating: parseInt(rating),
         blurb,
         timeUsed,
@@ -414,12 +426,23 @@ export default function AddProductScreen() {
 
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Purchase Date *</Text>
-            <TextInput
+            <TouchableOpacity
               style={styles.input}
-              value={purchaseDate}
-              onChangeText={setPurchaseDate}
-              placeholder="YYYY-MM-DD, 'today', '1 year ago', '2 months ago'..."
-            />
+              onPress={() => setShowDatePicker(true)}
+            >
+              <Text style={styles.dateText}>
+                {purchaseDate.toLocaleDateString()}
+              </Text>
+            </TouchableOpacity>
+            {showDatePicker && (
+              <DateTimePicker
+                value={purchaseDate}
+                mode="date"
+                display="default"
+                onChange={onDateChange}
+                maximumDate={new Date()}
+              />
+            )}
           </View>
 
           <View style={styles.inputContainer}>
@@ -584,6 +607,10 @@ const styles = StyleSheet.create({
     padding: 12,
     fontSize: 16,
     backgroundColor: '#fff',
+  },
+  dateText: {
+    fontSize: 16,
+    color: '#374151',
   },
   textArea: {
     height: 80,
