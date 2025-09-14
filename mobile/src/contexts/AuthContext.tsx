@@ -49,33 +49,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual login API call
-      // For now, simulate login and fetch user data from database
+      // For now, simulate login and find user by email
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Find existing user by searching users API
-      const existingUsers = await apiService.searchUsers(email.split('@')[0]).catch(() => []);
+      // Find user by exact email match
+      const existingUser = await apiService.findUserByEmail(email);
 
-      if (existingUsers.length === 0) {
-        // No users found - create a mock user for demo purposes
-        const userData: User = {
-          id: `user_${Date.now()}`, // Generate unique ID
-          name: email.split('@')[0], // Use email prefix as name
-          email: email,
-        };
-
-        setUser(userData);
-        await AsyncStorage.setItem('user', JSON.stringify(userData));
-        return true;
+      if (!existingUser) {
+        // No user found with this email
+        console.error('No user found with email:', email);
+        return false;
       }
 
-      // Use existing user data
-      const userId = existingUsers[0].id;
-
-      // Use the user data from search results since it already has the correct format
+      // Use the found user data
       const userData: User = {
-        id: existingUsers[0].id,
-        name: existingUsers[0].name,
-        email: existingUsers[0].email,
+        id: existingUser.id,
+        name: existingUser.name,
+        email: existingUser.email,
       };
 
       setUser(userData);
@@ -90,18 +80,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual registration API call
-      // For now, simulate registration and create user data
+      // For now, simulate registration
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Check if user already exists
-      const existingUsers = await apiService.searchUsers(email.split('@')[0]).catch(() => []);
+      // Check if user already exists by email
+      const existingUser = await apiService.findUserByEmail(email);
 
-      if (existingUsers.length > 0) {
+      if (existingUser) {
         // User already exists, use their data
         const userData: User = {
-          id: existingUsers[0].id,
-          name: existingUsers[0].name,
-          email: existingUsers[0].email,
+          id: existingUser.id,
+          name: existingUser.name,
+          email: existingUser.email,
         };
 
         setUser(userData);
@@ -109,7 +99,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return true;
       }
 
-      // Create new user data for registration
+      // For demo purposes, create a mock user (in real app, this would create in database)
       const userData: User = {
         id: `user_${Date.now()}`, // Generate unique ID
         name: name,

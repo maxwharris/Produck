@@ -7,11 +7,15 @@ export async function GET(request: NextRequest) {
     await dbConnect()
     const { searchParams } = new URL(request.url)
     const searchQuery = searchParams.get('search')
+    const emailQuery = searchParams.get('email')
 
     let query: any = {}
 
-    if (searchQuery) {
-      // Search in user names
+    if (emailQuery) {
+      // Exact email match for login
+      query.email = emailQuery
+    } else if (searchQuery) {
+      // Search in user names for general search
       query.name = { $regex: searchQuery, $options: 'i' }
     }
 

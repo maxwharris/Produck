@@ -122,6 +122,11 @@ class ApiService {
     return this.request(`/api/users?search=${encodeURIComponent(query)}`);
   }
 
+  async findUserByEmail(email: string): Promise<User | null> {
+    const users = await this.request(`/api/users?email=${encodeURIComponent(email)}`);
+    return users.length > 0 ? users[0] : null;
+  }
+
   // Reviews
   async getReviews(params: { productId?: string }): Promise<Review[]> {
     const searchParams = new URLSearchParams();
