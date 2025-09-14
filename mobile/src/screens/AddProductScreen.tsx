@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
 import { apiService, Category } from '../services/api';
 import * as ImagePicker from 'expo-image-picker';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function AddProductScreen() {
   const navigation = useNavigation();
@@ -261,8 +262,18 @@ export default function AddProductScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
-          <Text style={styles.title}>Add Produck</Text>
-          <Text style={styles.subtitle}>Share your product experience</Text>
+          <View style={styles.headerContent}>
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => navigation.goBack()}
+            >
+              <Ionicons name="close" size={24} color="#fff" />
+            </TouchableOpacity>
+            <View style={styles.headerText}>
+              <Text style={styles.title}>Add Produck</Text>
+              <Text style={styles.subtitle}>Share your product experience</Text>
+            </View>
+          </View>
         </View>
 
         <View style={styles.form}>
@@ -446,7 +457,7 @@ export default function AddProductScreen() {
 
             <View style={styles.modalButtons}>
               <TouchableOpacity
-                style={[styles.modalButton, styles.cancelButton]}
+                style={[styles.modalButton, styles.modalCancelButton]}
                 onPress={() => setShowCategoryModal(false)}
               >
                 <Text style={styles.cancelButtonText}>Cancel</Text>
@@ -476,6 +487,17 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     backgroundColor: '#F59E0B',
+  },
+  headerContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  cancelButton: {
+    marginRight: 16,
+    padding: 8,
+  },
+  headerText: {
+    flex: 1,
   },
   title: {
     fontSize: 24,
@@ -678,7 +700,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
   },
-  cancelButton: {
+  modalCancelButton: {
     backgroundColor: '#f3f4f6',
   },
   cancelButtonText: {
