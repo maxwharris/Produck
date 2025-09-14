@@ -64,7 +64,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       // Use test user data directly
       const userData: User = {
-        id: '507f1f77bcf86cd799439011', // Test user ID
+        id: '68c652806029388b2ec02548', // Test user ID
         name: 'John Smith',
         email: email,
       };
@@ -86,7 +86,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       // Use test user data directly
       const userData: User = {
-        id: '507f1f77bcf86cd799439011', // Test user ID
+        id: '68c652806029388b2ec02548', // Test user ID
         name: name,
         email: email,
       };
