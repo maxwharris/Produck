@@ -32,7 +32,7 @@ export default function MyProductsScreen() {
       const userProducts = await apiService.getProducts({ userId: user.id });
       setProducts(userProducts);
     } catch (error) {
-      console.error('Error fetching user products:', error);
+      // Handle error silently
     } finally {
       setLoading(false);
       setRefreshing(false);
