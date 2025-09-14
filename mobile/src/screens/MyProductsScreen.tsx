@@ -57,6 +57,7 @@ export default function MyProductsScreen() {
       product={item}
       onProductDeleted={handleProductDeleted}
       onProductUpdated={handleProductUpdated}
+      navigation={navigation}
     />
   );
 

@@ -16,10 +16,11 @@ interface ProductCardProps {
   product: Product;
   onProductDeleted?: () => void;
   onProductUpdated?: () => void;
+  navigation?: any;
 }
 
-export default function ProductCard({ product, onProductDeleted, onProductUpdated }: ProductCardProps) {
-  const navigation = useNavigation();
+export default function ProductCard({ product, onProductDeleted, onProductUpdated, navigation: navProp }: ProductCardProps) {
+  const navigation = navProp || useNavigation();
   const { user } = useAuth();
   const [review, setReview] = useState<Review | null>(null);
 
