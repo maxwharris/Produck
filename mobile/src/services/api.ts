@@ -119,9 +119,11 @@ class ApiService {
     });
   }
 
-  async deleteProduct(id: string): Promise<void> {
+  async deleteProduct(id: string, userId?: string): Promise<void> {
+    const body = userId ? { userId } : {};
     return this.request(`/api/products/${id}`, {
       method: 'DELETE',
+      body: JSON.stringify(body),
     });
   }
 

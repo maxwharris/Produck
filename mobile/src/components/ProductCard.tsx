@@ -69,7 +69,7 @@ export default function ProductCard({ product, onProductDeleted, onProductUpdate
           style: 'destructive',
           onPress: async () => {
             try {
-              await apiService.deleteProduct(product._id);
+              await apiService.deleteProduct(product._id, user?.id);
               Alert.alert('Success', 'Product deleted successfully');
               onProductDeleted?.();
             } catch (error) {

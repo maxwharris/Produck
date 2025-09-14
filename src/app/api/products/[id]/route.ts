@@ -37,7 +37,7 @@ export async function PUT(
     await dbConnect()
     const body = await request.json()
     const product = await Product.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id as string },
+      { _id: params.id, userId: (session.user as any).id as string },
       body,
       { new: true }
     ).populate('userId', 'name email')
@@ -56,20 +56,37 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    await dbConnect()
 
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // Try NextAuth session first (web app)
+    const session = await getServerSession(authOptions)
+    let authenticatedUserId: string | undefined
+
+    if (session?.user?.id) {
+      authenticatedUserId = session.user.id as string
+    } else {
+      // Fallback to userId in body (mobile app)
+      try {
+        const body = await request.json()
+        authenticatedUserId = body.userId
+      } catch (error) {
+        // If no body, try query params
+        const { searchParams } = new URL(request.url)
+        authenticatedUserId = searchParams.get('userId') || undefined
+      }
     }
 
-    await dbConnect()
+    if (!authenticatedUserId) {
+      return NextResponse.json({ error: 'User ID required' }, { status: 400 })
+    }
+
     const product = await Product.findOneAndDelete({
       _id: params.id,
-      userId: session.user.id as string
+      userId: authenticatedUserId
     })
 
     if (!product) {
-      return NextResponse.json({ error: 'Product not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Product not found or unauthorized' }, { status: 404 })
     }
     return NextResponse.json({ message: 'Product deleted' })
   } catch (error) {
