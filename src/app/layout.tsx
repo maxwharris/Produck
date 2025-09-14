@@ -7,8 +7,8 @@ import { Navigation } from '@/components/Navigation'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Product Tracker',
-  description: 'Track your purchased products and reviews',
+  title: 'Product Social',
+  description: 'Discover amazing products shared by the community. Share your experiences and find your next favorite item.',
 }
 
 export default function RootLayout({

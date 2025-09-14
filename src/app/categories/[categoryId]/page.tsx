@@ -5,6 +5,12 @@ import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import ProductCard from '@/components/ProductCard'
 
+interface User {
+  _id: string
+  name: string
+  email: string
+}
+
 interface Product {
   _id: string
   name: string
@@ -12,6 +18,7 @@ interface Product {
   purchaseDate: string
   cost: number
   description?: string
+  userId: User
 }
 
 interface Category {

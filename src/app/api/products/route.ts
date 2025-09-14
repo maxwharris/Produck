@@ -6,25 +6,20 @@ import Product from '@/models/Product'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     await dbConnect()
     const { searchParams } = new URL(request.url)
     const categoryId = searchParams.get('categoryId')
+    const userId = searchParams.get('userId')
+    const searchQuery = searchParams.get('search')
 
-    let query: any = { userId: session.user.id as string }
+    let query: any = {}
 
     if (categoryId) {
       // If categoryId is provided, we need to find products by category name
       // First get the category to get its name
       const Category = (await import('@/models/Category')).default
       const category = await Category.findOne({
-        _id: categoryId,
-        userId: session.user.id as string
+        _id: categoryId
       })
 
       if (category) {
@@ -32,6 +27,18 @@ export async function GET(request: NextRequest) {
       } else {
         return NextResponse.json({ error: 'Category not found' }, { status: 404 })
       }
+    }
+
+    if (userId) {
+      query.userId = userId
+    }
+
+    if (searchQuery) {
+      // Search in product name and description
+      query.$or = [
+        { name: { $regex: searchQuery, $options: 'i' } },
+        { description: { $regex: searchQuery, $options: 'i' } }
+      ]
     }
 
     const products = await Product.find(query)

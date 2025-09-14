@@ -6,14 +6,8 @@ import Category from '@/models/Category'
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
-
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-    }
-
     await dbConnect()
-    const categories = await Category.find({ userId: session.user.id as string })
+    const categories = await Category.find({})
       .sort({ createdAt: -1 })
 
     return NextResponse.json(categories)

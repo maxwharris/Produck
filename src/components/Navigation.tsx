@@ -3,13 +3,22 @@
 import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export function Navigation() {
   const { data: session, status } = useSession()
   const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleSignOut = async () => {
     await signOut({ callbackUrl: '/' })
+  }
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
   }
 
   if (status === 'loading') {
@@ -19,7 +28,7 @@ export function Navigation() {
           <div className="flex justify-between h-16">
             <div className="flex items-center">
               <Link href="/" className="text-xl font-bold text-gray-900">
-                Product Tracker
+                Product Social
               </Link>
             </div>
             <div className="flex items-center">
@@ -34,25 +43,51 @@ export function Navigation() {
   return (
     <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="text-xl font-bold text-gray-900">
-              Product Tracker
+              Product Social
             </Link>
           </div>
 
+          {/* Search Bar - Center */}
+          <div className="flex-1 max-w-md mx-8">
+            <form onSubmit={handleSearch} className="relative">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </form>
+          </div>
+
+          {/* Navigation Links */}
           <div className="flex items-center space-x-4">
+            <Link
+              href="/products"
+              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              Discover
+            </Link>
+
             {session?.user ? (
               <>
                 <Link
-                  href="/products"
+                  href="/manage"
                   className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  My Products
+                  Manage
                 </Link>
                 <div className="flex items-center space-x-2">
                   <span className="text-sm text-gray-700">
-                    Welcome, {session.user.name}
+                    {session.user.name}
                   </span>
                   <button
                     onClick={handleSignOut}
@@ -74,7 +109,7 @@ export function Navigation() {
                   href="/auth/signup"
                   className="bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
                 >
-                  Sign Up
+                  Join
                 </Link>
               </div>
             )}

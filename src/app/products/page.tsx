@@ -1,8 +1,23 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import ProductCard from '@/components/ProductCard'
+
+interface Product {
+  _id: string
+  name: string
+  category: string
+  purchaseDate: string
+  cost: number
+  description?: string
+  userId: {
+    _id: string
+    name: string
+    email: string
+  }
+}
 
 interface Category {
   _id: string
@@ -11,13 +26,16 @@ interface Category {
 }
 
 export default function ProductsPage() {
+  const { data: session } = useSession()
+  const [products, setProducts] = useState<Product[]>([])
   const [categories, setCategories] = useState<Category[]>([])
-  const [showAddForm, setShowAddForm] = useState(false)
-  const router = useRouter()
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetchCategories()
-  }, [])
+    fetchProducts()
+  }, [selectedCategory])
 
   const fetchCategories = async () => {
     try {
@@ -25,66 +43,112 @@ export default function ProductsPage() {
       if (response.ok) {
         const data = await response.json()
         setCategories(data)
-      } else {
-        console.error('Failed to fetch categories:', response.status, response.statusText)
-        setCategories([])
       }
     } catch (error) {
       console.error('Error fetching categories:', error)
-      setCategories([])
     }
   }
 
-  const handleAddCategory = () => {
-    setShowAddForm(true)
+  const fetchProducts = async () => {
+    try {
+      const url = selectedCategory
+        ? `/api/products?categoryId=${selectedCategory}`
+        : '/api/products'
+      const response = await fetch(url)
+      if (response.ok) {
+        const data = await response.json()
+        setProducts(data)
+      } else {
+        setProducts([])
+      }
+    } catch (error) {
+      console.error('Error fetching products:', error)
+      setProducts([])
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const handleCategoryAdded = () => {
-    setShowAddForm(false)
-    fetchCategories()
-  }
-
-  const handleCategoryClick = (categoryId: string) => {
-    router.push(`/categories/${categoryId}`)
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      </div>
+    )
   }
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">My Categories</h1>
-        <button
-          onClick={handleAddCategory}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Add Category
-        </button>
-      </div>
-
-      {showAddForm && (
-        <div className="mb-8">
-          <AddCategoryForm onCategoryAdded={handleCategoryAdded} />
+        <div>
+          <h1 className="text-3xl font-bold">Discover Products</h1>
+          <p className="text-gray-600 mt-2">Explore products shared by the community</p>
         </div>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((category) => (
-          <div
-            key={category._id}
-            onClick={() => handleCategoryClick(category._id)}
-            className="cursor-pointer bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
-            style={{ backgroundColor: category.color + '20', borderLeft: `4px solid ${category.color}` }}
+        {session?.user && (
+          <Link
+            href="/manage"
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
-            <h3 className="text-xl font-semibold mb-2" style={{ color: category.color }}>
-              {category.name}
-            </h3>
-            <p className="text-gray-600">Click to view products</p>
-          </div>
-        ))}
+            Manage My Products
+          </Link>
+        )}
       </div>
 
-      {categories.length === 0 && !showAddForm && (
+      {/* Category Filter */}
+      <div className="mb-8">
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={() => setSelectedCategory('')}
+            className={`px-4 py-2 rounded-full text-sm font-medium ${
+              selectedCategory === ''
+                ? 'bg-blue-500 text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+            }`}
+          >
+            All Products
+          </button>
+          {categories.map((category) => (
+            <button
+              key={category._id}
+              onClick={() => setSelectedCategory(category._id)}
+              className={`px-4 py-2 rounded-full text-sm font-medium ${
+                selectedCategory === category._id
+                  ? 'text-white'
+                  : 'text-gray-700 hover:bg-gray-300'
+              }`}
+              style={{
+                backgroundColor: selectedCategory === category._id ? category.color : '#e5e7eb'
+              }}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Products Grid */}
+      {products.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      ) : (
         <div className="text-center py-12">
-          <p className="text-gray-500 mb-4">No categories yet. Create your first category to get started!</p>
+          <p className="text-gray-500 mb-4">
+            {selectedCategory
+              ? `No products found in this category yet.`
+              : `No products shared yet. Be the first to share!`
+            }
+          </p>
+          {session?.user && (
+            <Link
+              href="/manage"
+              className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600"
+            >
+              Share Your First Product
+            </Link>
+          )}
         </div>
       )}
 
@@ -93,103 +157,6 @@ export default function ProductsPage() {
           ← Back to Home
         </Link>
       </div>
-    </div>
-  )
-}
-
-interface AddCategoryFormProps {
-  onCategoryAdded: () => void
-}
-
-function AddCategoryForm({ onCategoryAdded }: AddCategoryFormProps) {
-  const [formData, setFormData] = useState({
-    name: '',
-    color: '#3B82F6'
-  })
-  const [loading, setLoading] = useState(false)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-
-    try {
-      const response = await fetch('/api/categories', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-
-      if (response.ok) {
-        setFormData({
-          name: '',
-          color: '#3B82F6'
-        })
-        onCategoryAdded()
-      } else {
-        const error = await response.json()
-        alert(error.error || 'Failed to add category')
-      }
-    } catch (error) {
-      alert('Error adding category')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold mb-4">Add New Category</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium mb-1">Category Name</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-1">Color</label>
-          <input
-            type="color"
-            name="color"
-            value={formData.color}
-            onChange={handleChange}
-            required
-            className="w-full h-10 border border-gray-300 rounded-md cursor-pointer"
-          />
-        </div>
-
-        <div className="flex space-x-2">
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50"
-          >
-            {loading ? 'Adding...' : 'Add Category'}
-          </button>
-          <button
-            type="button"
-            onClick={onCategoryAdded}
-            className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
     </div>
   )
 }
