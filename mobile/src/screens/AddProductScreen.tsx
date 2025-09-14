@@ -147,14 +147,59 @@ export default function AddProductScreen() {
     const lowerInput = dateString.toLowerCase().trim();
 
     // Handle common date inputs
-    if (lowerInput === 'today') {
+    if (lowerInput === 'today' || lowerInput === 'now') {
       return today.toISOString().split('T')[0];
     } else if (lowerInput === 'yesterday') {
       const yesterday = new Date(today);
       yesterday.setDate(today.getDate() - 1);
       return yesterday.toISOString().split('T')[0];
-    } else if (lowerInput === 'now') {
-      return today.toISOString().split('T')[0];
+    }
+
+    // Handle relative time expressions
+    const relativeMatch = lowerInput.match(/^(\d+)\s+(year|month|week|day)s?\s+ago$/);
+    if (relativeMatch) {
+      const amount = parseInt(relativeMatch[1]);
+      const unit = relativeMatch[2];
+      const date = new Date(today);
+
+      switch (unit) {
+        case 'year':
+          date.setFullYear(today.getFullYear() - amount);
+          break;
+        case 'month':
+          date.setMonth(today.getMonth() - amount);
+          break;
+        case 'week':
+          date.setDate(today.getDate() - (amount * 7));
+          break;
+        case 'day':
+          date.setDate(today.getDate() - amount);
+          break;
+      }
+      return date.toISOString().split('T')[0];
+    }
+
+    // Handle "a year ago", "a month ago", etc.
+    const aRelativeMatch = lowerInput.match(/^a\s+(year|month|week|day)\s+ago$/);
+    if (aRelativeMatch) {
+      const unit = aRelativeMatch[1];
+      const date = new Date(today);
+
+      switch (unit) {
+        case 'year':
+          date.setFullYear(today.getFullYear() - 1);
+          break;
+        case 'month':
+          date.setMonth(today.getMonth() - 1);
+          break;
+        case 'week':
+          date.setDate(today.getDate() - 7);
+          break;
+        case 'day':
+          date.setDate(today.getDate() - 1);
+          break;
+      }
+      return date.toISOString().split('T')[0];
     }
 
     // Check if it's already a valid date format
@@ -373,7 +418,7 @@ export default function AddProductScreen() {
               style={styles.input}
               value={purchaseDate}
               onChangeText={setPurchaseDate}
-              placeholder="YYYY-MM-DD or 'today', 'yesterday'"
+              placeholder="YYYY-MM-DD, 'today', '1 year ago', '2 months ago'..."
             />
           </View>
 
