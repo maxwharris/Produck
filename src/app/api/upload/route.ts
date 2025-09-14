@@ -5,22 +5,28 @@ import path from 'path'
 export async function POST(request: NextRequest) {
   try {
     const data = await request.formData()
-    const file: File | null = data.get('file') as unknown as File
+    const files: File[] = data.getAll('files') as unknown as File[]
 
-    if (!file) {
-      return NextResponse.json({ error: 'No file received' }, { status: 400 })
+    if (!files || files.length === 0) {
+      return NextResponse.json({ error: 'No files received' }, { status: 400 })
     }
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
+    const uploadedFiles: string[] = []
 
-    const filename = `${Date.now()}-${file.name}`
-    const filepath = path.join(process.cwd(), 'public', 'uploads', filename)
+    for (const file of files) {
+      const bytes = await file.arrayBuffer()
+      const buffer = Buffer.from(bytes)
 
-    await writeFile(filepath, buffer)
+      const filename = `${Date.now()}-${file.name}`
+      const filepath = path.join(process.cwd(), 'public', 'uploads', filename)
 
-    return NextResponse.json({ filename })
+      await writeFile(filepath, buffer)
+      uploadedFiles.push(`/uploads/${filename}`)
+    }
+
+    return NextResponse.json({ urls: uploadedFiles })
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to upload file' }, { status: 500 })
+    console.error('Upload error:', error)
+    return NextResponse.json({ error: 'Failed to upload files' }, { status: 500 })
   }
 }
