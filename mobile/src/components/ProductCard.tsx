@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { apiService, getFullImageUrl, Product, Review } from '../services/api';
@@ -16,6 +17,11 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const navigation = useNavigation();
   const [review, setReview] = useState<Review | null>(null);
+
+  // Calculate card width for two cards side by side
+  const screenWidth = Dimensions.get('window').width;
+  const cardWidth = (screenWidth - 48) / 2; // 48 = margins (16*2) + spacing (16)
+  const cardHeight = cardWidth * 1.4; // Maintain aspect ratio
 
   useEffect(() => {
     fetchReview();
@@ -43,9 +49,12 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handlePress}>
+    <TouchableOpacity
+      style={[styles.container, { width: cardWidth, height: cardHeight }]}
+      onPress={handlePress}
+    >
       {/* Product Image */}
-      <View style={styles.imageContainer}>
+      <View style={[styles.imageContainer, { height: cardHeight * 0.5 }]}>
         {review?.photos && review.photos.length > 0 ? (
           <Image
             source={{ uri: getFullImageUrl(review.photos[0]) }}
@@ -112,11 +121,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
     overflow: 'hidden',
-    width: 240, // Smaller fixed width for mobile screens
-    height: 340, // Adjusted height to maintain proportions
   },
   imageContainer: {
-    height: 180,
     backgroundColor: '#f3f4f6',
     justifyContent: 'center',
     alignItems: 'center',
