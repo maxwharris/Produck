@@ -59,15 +59,42 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual login API call
-      // For now, simulate login with known test user data
+      // For now, simulate login and fetch user data from database
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Use test user data directly
-      const userData: User = {
-        id: '68c652806029388b2ec02548', // Test user ID
-        name: 'John Smith',
-        email: email,
-      };
+      // Find existing user by searching users API
+      const existingUsers = await fetch(`${API_BASE_URL}/api/users?search=${encodeURIComponent(email.split('@')[0])}`)
+        .then(res => res.json())
+        .catch(() => []);
+
+      let userId = '68c652806029388b2ec02548'; // Default user ID
+      let userName = 'Demo User';
+
+      if (existingUsers.length > 0) {
+        // Use existing user data
+        userId = existingUsers[0]._id;
+        userName = existingUsers[0].name;
+      }
+
+      // Fetch complete user data from database
+      const userResponse = await fetch(`${API_BASE_URL}/api/users/${userId}`);
+      let userData: User;
+
+      if (userResponse.ok) {
+        const dbUser = await userResponse.json();
+        userData = {
+          id: dbUser._id,
+          name: dbUser.name,
+          email: dbUser.email,
+        };
+      } else {
+        // Fallback with search result or default
+        userData = {
+          id: userId,
+          name: userName,
+          email: email,
+        };
+      }
 
       setUser(userData);
       await AsyncStorage.setItem('user', JSON.stringify(userData));
@@ -81,15 +108,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual registration API call
-      // For now, simulate registration with known test user data
+      // For now, simulate registration and fetch user data from database
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Use test user data directly
-      const userData: User = {
-        id: '68c652806029388b2ec02548', // Test user ID
-        name: name,
-        email: email,
-      };
+      // Use the same default user ID for registration
+      const userId = '68c652806029388b2ec02548';
+
+      // Fetch complete user data from database
+      const userResponse = await fetch(`${API_BASE_URL}/api/users/${userId}`);
+      let userData: User;
+
+      if (userResponse.ok) {
+        const dbUser = await userResponse.json();
+        userData = {
+          id: dbUser._id,
+          name: dbUser.name,
+          email: dbUser.email,
+        };
+      } else {
+        // Fallback with provided registration data
+        userData = {
+          id: userId,
+          name: name,
+          email: email,
+        };
+      }
 
       setUser(userData);
       await AsyncStorage.setItem('user', JSON.stringify(userData));
