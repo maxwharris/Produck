@@ -47,23 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const userData = await AsyncStorage.getItem('user');
       if (userData) {
         const parsedUser = JSON.parse(userData);
-
-        // Fetch fresh user data from database to ensure it's up to date
-        const userResponse = await fetch(`${API_BASE_URL}/api/users/${parsedUser.id}`);
-        if (userResponse.ok) {
-          const dbUser = await userResponse.json();
-          const freshUserData = {
-            id: dbUser._id,
-            name: dbUser.name,
-            email: dbUser.email,
-          };
-          setUser(freshUserData);
-          // Update stored data with fresh info
-          await AsyncStorage.setItem('user', JSON.stringify(freshUserData));
-        } else {
-          // If fetch fails, use stored data as fallback
-          setUser(parsedUser);
-        }
+        setUser(parsedUser);
       }
     } catch (error) {
       console.error('Error checking auth state:', error);
@@ -75,41 +59,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual login API call
-      // For now, simulate login and fetch user data from database
+      // For now, simulate login with known test user data
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // First, try to find an existing user with this email
-      // If not found, use a default user ID that exists
-      const existingUsers = await fetch(`${API_BASE_URL}/api/users?search=${encodeURIComponent(email.split('@')[0])}`)
-        .then(res => res.json())
-        .catch(() => []);
-
-      let userId = '677f5b8b8c8b8b8b8b8b8b8b'; // Default fallback ID
-
-      if (existingUsers.length > 0) {
-        // Use the first matching user
-        userId = existingUsers[0]._id;
-      }
-
-      // Fetch the actual user data from the database using the user ID
-      const userResponse = await fetch(`${API_BASE_URL}/api/users/${userId}`);
-      let userData: User;
-
-      if (userResponse.ok) {
-        const dbUser = await userResponse.json();
-        userData = {
-          id: dbUser._id,
-          name: dbUser.name,
-          email: dbUser.email,
-        };
-      } else {
-        // Fallback if user fetch fails
-        userData = {
-          id: userId,
-          name: 'Demo User',
-          email: email,
-        };
-      }
+      // Use test user data directly
+      const userData: User = {
+        id: '507f1f77bcf86cd799439011', // Test user ID
+        name: 'John Smith',
+        email: email,
+      };
 
       setUser(userData);
       await AsyncStorage.setItem('user', JSON.stringify(userData));
@@ -123,31 +81,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const register = async (name: string, email: string, password: string): Promise<boolean> => {
     try {
       // TODO: Implement actual registration API call
-      // For now, simulate registration
+      // For now, simulate registration with known test user data
       await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Use a consistent user ID that exists in the database
-      const userId = '677f5b8b8c8b8b8b8b8b8b8b'; // Use existing user ID
-
-      // Fetch the actual user data from the database using the user ID
-      const userResponse = await fetch(`${API_BASE_URL}/api/users/${userId}`);
-      let userData: User;
-
-      if (userResponse.ok) {
-        const dbUser = await userResponse.json();
-        userData = {
-          id: dbUser._id,
-          name: dbUser.name,
-          email: dbUser.email,
-        };
-      } else {
-        // Fallback if user fetch fails
-        userData = {
-          id: userId,
-          name: name,
-          email: email,
-        };
-      }
+      // Use test user data directly
+      const userData: User = {
+        id: '507f1f77bcf86cd799439011', // Test user ID
+        name: name,
+        email: email,
+      };
 
       setUser(userData);
       await AsyncStorage.setItem('user', JSON.stringify(userData));
