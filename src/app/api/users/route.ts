@@ -20,7 +20,14 @@ export async function GET(request: NextRequest) {
       .sort({ name: 1 })
       .limit(20) // Limit results for performance
 
-    return NextResponse.json(users)
+    // Transform to use 'id' instead of '_id'
+    const transformedUsers = users.map(user => ({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+    }))
+
+    return NextResponse.json(transformedUsers)
   } catch (error) {
     return NextResponse.json({ error: 'Failed to fetch users' }, { status: 500 })
   }

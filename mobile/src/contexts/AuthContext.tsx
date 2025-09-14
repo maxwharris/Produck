@@ -1,16 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-// Import API_BASE_URL from the api service
-const API_BASE_URL = __DEV__
-  ? 'http://192.168.1.165:3000' // Replace with your computer's actual IP
-  : 'https://your-production-api.com'; // For production
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-}
+import { apiService, User } from '../services/api';
 
 interface AuthContextType {
   user: User | null;
@@ -63,9 +53,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Find existing user by searching users API
-      const existingUsers = await fetch(`${API_BASE_URL}/api/users?search=${encodeURIComponent(email.split('@')[0])}`)
-        .then(res => res.json())
-        .catch(() => []);
+      const existingUsers = await apiService.searchUsers(email.split('@')[0]).catch(() => []);
 
       if (existingUsers.length === 0) {
         // No users found - create a mock user for demo purposes
@@ -81,27 +69,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       // Use existing user data
-      const userId = existingUsers[0]._id;
+      const userId = existingUsers[0].id;
 
-      // Fetch complete user data from database
-      const userResponse = await fetch(`${API_BASE_URL}/api/users/${userId}`);
-      let userData: User;
-
-      if (userResponse.ok) {
-        const dbUser = await userResponse.json();
-        userData = {
-          id: dbUser._id,
-          name: dbUser.name,
-          email: dbUser.email,
-        };
-      } else {
-        // Fallback with search result
-        userData = {
-          id: userId,
-          name: existingUsers[0].name,
-          email: existingUsers[0].email,
-        };
-      }
+      // Use the user data from search results since it already has the correct format
+      const userData: User = {
+        id: existingUsers[0].id,
+        name: existingUsers[0].name,
+        email: existingUsers[0].email,
+      };
 
       setUser(userData);
       await AsyncStorage.setItem('user', JSON.stringify(userData));
@@ -119,27 +94,19 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       // Check if user already exists
-      const existingUsers = await fetch(`${API_BASE_URL}/api/users?search=${encodeURIComponent(email.split('@')[0])}`)
-        .then(res => res.json())
-        .catch(() => []);
+      const existingUsers = await apiService.searchUsers(email.split('@')[0]).catch(() => []);
 
       if (existingUsers.length > 0) {
         // User already exists, use their data
-        const userId = existingUsers[0]._id;
-        const userResponse = await fetch(`${API_BASE_URL}/api/users/${userId}`);
+        const userData: User = {
+          id: existingUsers[0].id,
+          name: existingUsers[0].name,
+          email: existingUsers[0].email,
+        };
 
-        if (userResponse.ok) {
-          const dbUser = await userResponse.json();
-          const userData: User = {
-            id: dbUser._id,
-            name: dbUser.name,
-            email: dbUser.email,
-          };
-
-          setUser(userData);
-          await AsyncStorage.setItem('user', JSON.stringify(userData));
-          return true;
-        }
+        setUser(userData);
+        await AsyncStorage.setItem('user', JSON.stringify(userData));
+        return true;
       }
 
       // Create new user data for registration
