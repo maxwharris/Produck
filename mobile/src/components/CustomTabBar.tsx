@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: '#F2ECD8',
-    height: 90,
-    paddingBottom: 20,
-    paddingTop: 20,
+    height: 80,
+    paddingBottom: 10,
+    paddingTop: 0,
     alignItems: 'center',
     justifyContent: 'space-around',
     borderTopWidth: 1,

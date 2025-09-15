@@ -31,6 +31,7 @@ function AuthStack() {
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
           paddingTop: 20,
+          paddingBottom: 10,
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -60,6 +61,7 @@ function HomeStack() {
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
           paddingTop: 20,
+          paddingBottom: 10,
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -75,7 +77,7 @@ function HomeStack() {
           headerTitle: () => (
             <Image
               source={require('./assets/produck-logo-transparent.png')}
-              style={{ width: 120, height: 36, resizeMode: 'contain' }}
+              style={{ width: 120, height: 36, resizeMode: 'contain'}}
             />
           ),
         }}
@@ -88,10 +90,11 @@ function HomeStack() {
           headerLeft: () => (
             <Image
               source={require('./assets/produck-logo-transparent.png')}
-              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain'}}
             />
           ),
         }}
+  
       />
       <Stack.Screen
         name="EditProduct"
@@ -130,6 +133,7 @@ function DiscoverStack() {
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
           paddingTop: 20,
+          paddingBottom: 10,
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -200,6 +204,7 @@ function SearchStack() {
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
           paddingTop: 20,
+          paddingBottom: 10,
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -270,6 +275,7 @@ function ProfileStack() {
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
           paddingTop: 20,
+          paddingBottom: 10,
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
