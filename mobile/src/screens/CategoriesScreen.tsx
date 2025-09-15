@@ -97,17 +97,19 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#F2C335',
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: '#e0e7ff',
+    fontFamily: 'Poppins_400Regular',
+    color: '#fff',
   },
   categoryList: {
     padding: 20,
@@ -138,6 +140,7 @@ const styles = StyleSheet.create({
   },
   categoryIconText: {
     fontSize: 20,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#fff',
   },
@@ -146,16 +149,19 @@ const styles = StyleSheet.create({
   },
   categoryName: {
     fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 4,
   },
   categoryDescription: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
   },
   arrow: {
     fontSize: 20,
+    fontFamily: 'Poppins_300Light',
     color: '#9ca3af',
     fontWeight: '300',
   },

@@ -54,7 +54,7 @@ export default function SettingsScreen() {
         },
         {
           title: 'Dark Mode',
-          subtitle: 'Use dark theme',
+          subtitle: 'Go full dark duck',
           type: 'switch',
           value: darkModeEnabled,
           onValueChange: setDarkModeEnabled,
@@ -187,17 +187,19 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F2C335',
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: '#e0e7ff',
+    fontFamily: 'Poppins_400Regular',
+    color: '#fff',
   },
   section: {
     marginTop: 20,
@@ -205,6 +207,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 12,
@@ -227,16 +230,19 @@ const styles = StyleSheet.create({
   },
   settingTitle: {
     fontSize: 16,
+    fontFamily: 'Poppins_500Medium',
     fontWeight: '500',
     color: '#111827',
     marginBottom: 2,
   },
   settingSubtitle: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
   },
   settingArrow: {
     fontSize: 20,
+    fontFamily: 'Poppins_300Light',
     color: '#9ca3af',
     fontWeight: '300',
   },
@@ -246,6 +252,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#9ca3af',
     textAlign: 'center',
   },

@@ -131,17 +131,19 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#F2C335',
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: '#e0e7ff',
+    fontFamily: 'Poppins_400Regular',
+    color: '#fff',
   },
   statsContainer: {
     backgroundColor: '#fff',
@@ -156,11 +158,13 @@ const styles = StyleSheet.create({
   },
   statNumber: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#111827',
   },
   statLabel: {
     fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     marginTop: 2,
   },
@@ -173,6 +177,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: '#fff',
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
   productGrid: {
@@ -186,12 +191,14 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: 20,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 8,
   },
   emptyText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     textAlign: 'center',
     marginBottom: 24,
@@ -205,6 +212,7 @@ const styles = StyleSheet.create({
   emptyButtonText: {
     color: '#fff',
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
 });

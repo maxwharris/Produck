@@ -565,7 +565,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#F59E0B',
+    backgroundColor: '#F2C335',
   },
   headerContent: {
     flexDirection: 'row',
@@ -580,13 +580,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
-    color: '#92400E',
+    fontFamily: 'Poppins_400Regular',
+    color: '#fff',
   },
   form: {
     padding: 20,
@@ -596,6 +598,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#374151',
     marginBottom: 8,
@@ -610,6 +613,7 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#374151',
   },
   textArea: {
@@ -658,6 +662,7 @@ const styles = StyleSheet.create({
   },
   imageButtonText: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#374151',
   },
   categoryScroll: {
@@ -674,6 +679,7 @@ const styles = StyleSheet.create({
   categoryButtonText: {
     color: '#374151',
     fontSize: 14,
+    fontFamily: 'Poppins_500Medium',
     fontWeight: '500',
   },
   categoryButtonTextSelected: {
@@ -688,6 +694,7 @@ const styles = StyleSheet.create({
   createCategoryText: {
     color: '#F59E0B',
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
   starsContainer: {
@@ -720,6 +727,7 @@ const styles = StyleSheet.create({
   submitButtonText: {
     color: '#fff',
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
   modalOverlay: {
@@ -737,6 +745,7 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     fontSize: 20,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#111827',
     marginBottom: 16,
@@ -753,6 +762,7 @@ const styles = StyleSheet.create({
   },
   colorLabel: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#374151',
     marginBottom: 12,
@@ -789,6 +799,7 @@ const styles = StyleSheet.create({
   cancelButtonText: {
     color: '#374151',
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
   createButton: {
@@ -797,6 +808,7 @@ const styles = StyleSheet.create({
   createButtonText: {
     color: '#fff',
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
 });
