@@ -51,7 +51,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       {/* Product Image */}
-      <div className="h-48 bg-gray-100 flex items-center justify-center">
+      <div className="h-48 bg-produck-bg flex items-center justify-center">
         {review?.photos && review.photos.length > 0 ? (
           <img
             src={review.photos[0]}
@@ -59,24 +59,24 @@ export default function ProductCard({ product }: ProductCardProps) {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="text-center text-gray-400">
+          <div className="text-center text-produck-brown/40">
             <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <p className="mt-2 text-xs">No image</p>
+            <p className="mt-2 text-xs font-medium">No image</p>
           </div>
         )}
       </div>
 
       {/* Product Info */}
       <div className="p-6">
-        <h3 className="text-xl font-semibold mb-2">{product.name}</h3>
+        <h3 className="text-xl font-semibold text-produck-brown mb-2">{product.name}</h3>
 
         {/* User Info */}
         <div className="mb-2">
           <Link
             href={`/users/${product.userId._id}`}
-            className="text-blue-600 hover:underline text-sm"
+            className="text-produck-blue hover:text-produck-blue/80 text-sm font-medium"
           >
             by {product.userId.name}
           </Link>
@@ -92,18 +92,18 @@ export default function ProductCard({ product }: ProductCardProps) {
             ))}
           </div>
           {review && (
-            <span className="text-sm text-gray-600">({review.rating}/5)</span>
+            <span className="text-sm text-produck-brown/70 font-medium">({review.rating}/5)</span>
           )}
         </div>
 
-        <p className="text-gray-600 mb-2">Cost: ${product.cost}</p>
+        <p className="text-produck-brown/80 mb-2 font-semibold">Cost: ${product.cost}</p>
         {product.description && (
-          <p className="text-gray-500 mb-4 line-clamp-2">{product.description}</p>
+          <p className="text-produck-brown/60 mb-4 line-clamp-2 font-medium">{product.description}</p>
         )}
         <div className="mt-4">
           <Link
             href={`/products/${product._id}`}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block text-sm"
+            className="bg-produck-blue text-white px-4 py-2 rounded hover:bg-produck-blue/90 inline-block text-sm font-semibold"
           >
             View Details
           </Link>

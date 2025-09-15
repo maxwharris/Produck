@@ -23,20 +23,20 @@ export function Navigation() {
 
   if (status === 'loading') {
     return (
-      <nav className="bg-white shadow-sm border-b">
+      <nav className="bg-produck-yellow shadow-sm border-b border-produck-yellow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
+          <div className="flex justify-between h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <img
                 src="/produck-logo-transparent.png"
                 alt="Produck"
-                className="h-8 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
           </div>
             <div className="flex items-center">
-              <div className="animate-pulse bg-gray-200 h-8 w-20 rounded"></div>
+              <div className="animate-pulse bg-produck-bg h-8 w-20 rounded"></div>
             </div>
           </div>
         </div>
@@ -45,15 +45,15 @@ export function Navigation() {
   }
 
   return (
-    <nav className="bg-white shadow-sm border-b">
+    <nav className="bg-produck-yellow shadow-sm border-b border-produck-yellow">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <img
                 src="/produck-logo-transparent.png"
                 alt="Produck"
-                className="h-8 w-auto"
+                className="h-10 w-auto"
               />
             </Link>
           </div>
@@ -80,7 +80,7 @@ export function Navigation() {
           <div className="flex items-center space-x-4">
             <Link
               href="/products"
-              className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+              className="text-produck-brown hover:text-produck-brown/80 px-3 py-2 rounded-md text-sm font-semibold"
             >
               Discover
             </Link>
@@ -89,17 +89,17 @@ export function Navigation() {
               <>
                 <Link
                   href="/manage"
-                  className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-produck-brown hover:text-produck-brown/80 px-3 py-2 rounded-md text-sm font-semibold"
                 >
                   Manage
                 </Link>
                 <div className="flex items-center space-x-2">
-                  <span className="text-sm text-gray-700">
+                  <span className="text-sm text-produck-brown font-medium">
                     {session.user.name}
                   </span>
                   <button
                     onClick={handleSignOut}
-                    className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700"
+                    className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 font-semibold"
                   >
                     Sign Out
                   </button>
@@ -109,13 +109,13 @@ export function Navigation() {
               <div className="flex items-center space-x-2">
                 <Link
                   href="/auth/signin"
-                  className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-produck-brown hover:text-produck-brown/80 px-3 py-2 rounded-md text-sm font-semibold"
                 >
                   Sign In
                 </Link>
                 <Link
                   href="/auth/signup"
-                  className="bg-blue-600 text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
+                  className="bg-produck-blue text-white px-3 py-2 rounded-md text-sm font-semibold hover:bg-produck-blue/90"
                 >
                   Join
                 </Link>
