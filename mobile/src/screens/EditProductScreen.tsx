@@ -30,6 +30,7 @@ export default function EditProductScreen() {
   const [loading, setLoading] = useState(false);
   const [userCategories, setUserCategories] = useState<Category[]>([]);
   const [images, setImages] = useState<string[]>([]);
+  const [reviewId, setReviewId] = useState<string | null>(null);
 
   // Form state - pre-populate with existing product data
   const [name, setName] = useState(product.name);
@@ -77,6 +78,7 @@ export default function EditProductScreen() {
       const reviews = await apiService.getReviews({ productId: product._id });
       if (reviews.length > 0) {
         const review = reviews[0];
+        setReviewId(review._id);
         setRating(review.rating.toString());
         setBlurb(review.blurb);
         setTimeUsed(review.timeUsed);
@@ -228,9 +230,16 @@ export default function EditProductScreen() {
 
       await apiService.updateProduct(product._id, productData, user.id);
 
-      // Update the review as well
-      // Note: In a full implementation, you'd want to update the review separately
-      // For now, we'll just update the product data
+      // Update the review as well if it exists
+      if (reviewId) {
+        const reviewData = {
+          rating: parseInt(rating),
+          blurb,
+          timeUsed,
+          photos: allPhotoUrls,
+        };
+        await apiService.updateReview(reviewId, reviewData, user.id);
+      }
 
       Alert.alert('Success', 'Product updated successfully!', [
         {

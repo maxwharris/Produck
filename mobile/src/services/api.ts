@@ -199,6 +199,19 @@ class ApiService {
 
     return this.request(`/api/reviews?${searchParams.toString()}`);
   }
+
+  async updateReview(id: string, reviewData: {
+    rating?: number;
+    blurb?: string;
+    photos?: string[];
+    timeUsed?: string;
+  }, userId?: string): Promise<Review> {
+    const body = userId ? { ...reviewData, userId } : reviewData;
+    return this.request(`/api/reviews/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+    });
+  }
 }
 
 export const apiService = new ApiService();

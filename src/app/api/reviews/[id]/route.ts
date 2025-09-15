@@ -18,7 +18,7 @@ export async function GET(
     await dbConnect()
     const review = await Review.findOne({
       _id: params.id,
-      userId: session.user.id
+      userId: (session.user as any).id
     }).populate('productId').populate('userId', 'name email')
 
     if (!review) {
@@ -35,22 +35,36 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
-    const session = await getServerSession(authOptions)
+    await dbConnect()
 
-    if (!session?.user?.id) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    // Parse request body first
+    const body = await request.json()
+
+    // Try NextAuth session first (web app)
+    const session = await getServerSession(authOptions)
+    let authenticatedUserId: string | undefined
+
+    if (session?.user?.id) {
+      authenticatedUserId = (session.user as any).id as string
+    } else {
+      // Fallback to userId in body (mobile app)
+      authenticatedUserId = body.userId
+      // Remove userId from body so it doesn't interfere with update
+      delete body.userId
     }
 
-    await dbConnect()
-    const body = await request.json()
+    if (!authenticatedUserId) {
+      return NextResponse.json({ error: 'User ID required' }, { status: 400 })
+    }
+
     const review = await Review.findOneAndUpdate(
-      { _id: params.id, userId: session.user.id },
+      { _id: params.id, userId: authenticatedUserId },
       body,
       { new: true }
     ).populate('productId').populate('userId', 'name email')
 
     if (!review) {
-      return NextResponse.json({ error: 'Review not found' }, { status: 404 })
+      return NextResponse.json({ error: 'Review not found or unauthorized' }, { status: 404 })
     }
     return NextResponse.json(review)
   } catch (error) {
