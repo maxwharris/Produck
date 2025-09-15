@@ -192,12 +192,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#e0e7ff',
   },
   searchContainer: {
@@ -237,6 +239,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '500',
     color: '#6b7280',
   },
@@ -251,6 +254,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     padding: 20,
@@ -297,16 +301,19 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 2,
   },
   userEmail: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
   },
   viewProfileText: {
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#3b82f6',
     fontWeight: '500',
   },
@@ -318,12 +325,14 @@ const styles = StyleSheet.create({
   },
   emptyTitle: {
     fontSize: 20,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 8,
   },
   emptyText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     textAlign: 'center',
     lineHeight: 24,
@@ -336,6 +345,7 @@ const styles = StyleSheet.create({
   },
   initialTitle: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#111827',
     marginBottom: 12,
@@ -343,6 +353,7 @@ const styles = StyleSheet.create({
   },
   initialText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     textAlign: 'center',
     lineHeight: 24,

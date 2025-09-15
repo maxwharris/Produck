@@ -53,8 +53,8 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../../assets/produck-logo-transparent.png')} style={styles.logo} />
-        <Text style={styles.subtitle}>Discover amazing products shared by the community</Text>
+        <Text style={styles.title}>Produck</Text>
+        <Text style={styles.subtitle}>Share and explore top Producks</Text>
       </View>
 
       <View style={styles.sectionHeader}>
@@ -109,12 +109,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#e0e7ff',
     lineHeight: 24,
   },
@@ -130,11 +132,13 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
   },
   viewAllText: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#3b82f6',
     fontWeight: '500',
   },
@@ -149,12 +153,14 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#374151',
     marginBottom: 8,
   },
   emptySubtext: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     textAlign: 'center',
   },

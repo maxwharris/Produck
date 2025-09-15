@@ -176,12 +176,14 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#402A1D',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#e0e7ff',
   },
   categoryContainer: {
@@ -204,6 +206,7 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '500',
     color: '#374151',
   },
@@ -218,6 +221,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     textAlign: 'center',
   },

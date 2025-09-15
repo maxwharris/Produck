@@ -199,6 +199,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 18,
+    fontFamily: 'Poppins_400Regular',
     color: '#ef4444',
   },
   header: {
@@ -222,12 +223,14 @@ const styles = StyleSheet.create({
   },
   userName: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 4,
   },
   userEmail: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#e0e7ff',
     marginBottom: 20,
   },
@@ -241,11 +244,13 @@ const styles = StyleSheet.create({
   },
   statNumber: {
     fontSize: 20,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#fff',
   },
   statLabel: {
     fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#e0e7ff',
     marginTop: 2,
   },
@@ -280,12 +285,14 @@ const styles = StyleSheet.create({
   },
   menuTitle: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 2,
   },
   menuSubtitle: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
   },
   menuArrow: {
@@ -299,12 +306,14 @@ const styles = StyleSheet.create({
   },
   appVersion: {
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#374151',
     marginBottom: 4,
   },
   appDescription: {
     fontSize: 12,
+    fontFamily: 'Poppins_400Regular',
     color: '#9ca3af',
     textAlign: 'center',
   },
@@ -321,6 +330,7 @@ const styles = StyleSheet.create({
   signOutText: {
     color: '#fff',
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
   loadingOverlay: {
