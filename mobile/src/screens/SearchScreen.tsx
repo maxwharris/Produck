@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F2C335',
   },
   title: {
     fontSize: 24,
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F2C335',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,

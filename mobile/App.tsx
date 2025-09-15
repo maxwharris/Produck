@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, Image } from 'react-native';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import CustomTabBar from './src/components/CustomTabBar';
 import HomeScreen from './src/screens/HomeScreen';
@@ -66,22 +66,54 @@ function HomeStack() {
       <Stack.Screen
         name="HomeMain"
         component={HomeScreen}
-        options={{ title: 'Produck' }}
+        options={{
+          title: 'Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 100, height: 30, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={{ title: 'Product Details' }}
+        options={{
+          title: 'Product Details',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="EditProduct"
         component={EditProductScreen}
-        options={{ title: 'Edit Produck' }}
+        options={{
+          title: 'Edit Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="UserProfile"
         component={UserProfileScreen}
-        options={{ title: 'User Profile' }}
+        options={{
+          title: 'User Profile',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -103,22 +135,54 @@ function DiscoverStack() {
       <Stack.Screen
         name="DiscoverMain"
         component={DiscoverScreen}
-        options={{ title: 'Discover Products' }}
+        options={{
+          title: 'Discover Products',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 100, height: 30, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={{ title: 'Product Details' }}
+        options={{
+          title: 'Product Details',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="EditProduct"
         component={EditProductScreen}
-        options={{ title: 'Edit Produck' }}
+        options={{
+          title: 'Edit Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="UserProfile"
         component={UserProfileScreen}
-        options={{ title: 'User Profile' }}
+        options={{
+          title: 'User Profile',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -140,22 +204,54 @@ function SearchStack() {
       <Stack.Screen
         name="SearchMain"
         component={SearchScreen}
-        options={{ title: 'Search Produck' }}
+        options={{
+          title: 'Search Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 100, height: 30, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={{ title: 'Product Details' }}
+        options={{
+          title: 'Product Details',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="EditProduct"
         component={EditProductScreen}
-        options={{ title: 'Edit Produck' }}
+        options={{
+          title: 'Edit Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="UserProfile"
         component={UserProfileScreen}
-        options={{ title: 'User Profile' }}
+        options={{
+          title: 'User Profile',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -177,42 +273,106 @@ function ProfileStack() {
       <Stack.Screen
         name="ProfileMain"
         component={ProfileScreen}
-        options={{ title: 'Profile' }}
+        options={{
+          title: 'Profile',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="MyProducts"
         component={MyProductsScreen}
-        options={{ title: 'My Producks' }}
+        options={{
+          title: 'My Producks',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="AddProduct"
         component={AddProductScreen}
-        options={{ title: 'Add Produck' }}
+        options={{
+          title: 'Add Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="EditProduct"
         component={EditProductScreen}
-        options={{ title: 'Edit Produck' }}
+        options={{
+          title: 'Edit Produck',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="Categories"
         component={CategoriesScreen}
-        options={{ title: 'Categories' }}
+        options={{
+          title: 'Categories',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{ title: 'Settings' }}
+        options={{
+          title: 'Settings',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetailScreen}
-        options={{ title: 'Produck Details' }}
+        options={{
+          title: 'Produck Details',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
       <Stack.Screen
         name="UserProfile"
         component={UserProfileScreen}
-        options={{ title: 'User Profile' }}
+        options={{
+          title: 'User Profile',
+          headerLeft: () => (
+            <Image
+              source={require('./assets/produck-logo-transparent.png')}
+              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );

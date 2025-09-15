@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9fafb',
   },
   header: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F2C335',
     padding: 30,
     alignItems: 'center',
   },
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#3b82f6',
+    color: '#F2C335',
   },
   userName: {
     fontSize: 24,
