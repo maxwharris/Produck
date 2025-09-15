@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, Text, ActivityIndicator, Image } from 'react-native';
+import { useFonts, Poppins_400Regular, Poppins_600SemiBold, Poppins_700Bold } from '@expo-google-fonts/poppins';
 import { AuthProvider, useAuth } from './src/contexts/AuthContext';
 import CustomTabBar from './src/components/CustomTabBar';
 import HomeScreen from './src/screens/HomeScreen';
@@ -32,6 +33,7 @@ function AuthStack() {
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
+          fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
         },
       }}
@@ -59,6 +61,7 @@ function HomeStack() {
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
+          fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
         },
       }}
@@ -67,11 +70,10 @@ function HomeStack() {
         name="HomeMain"
         component={HomeScreen}
         options={{
-          title: 'Produck',
-          headerLeft: () => (
+          headerTitle: () => (
             <Image
               source={require('./assets/produck-logo-transparent.png')}
-              style={{ width: 100, height: 30, marginLeft: 10, resizeMode: 'contain' }}
+              style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
         }}
@@ -128,6 +130,7 @@ function DiscoverStack() {
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
+          fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
         },
       }}
@@ -136,11 +139,10 @@ function DiscoverStack() {
         name="DiscoverMain"
         component={DiscoverScreen}
         options={{
-          title: 'Discover Products',
-          headerLeft: () => (
+          headerTitle: () => (
             <Image
               source={require('./assets/produck-logo-transparent.png')}
-              style={{ width: 100, height: 30, marginLeft: 10, resizeMode: 'contain' }}
+              style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
         }}
@@ -197,6 +199,7 @@ function SearchStack() {
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
+          fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
         },
       }}
@@ -205,11 +208,10 @@ function SearchStack() {
         name="SearchMain"
         component={SearchScreen}
         options={{
-          title: 'Search Produck',
-          headerLeft: () => (
+          headerTitle: () => (
             <Image
               source={require('./assets/produck-logo-transparent.png')}
-              style={{ width: 100, height: 30, marginLeft: 10, resizeMode: 'contain' }}
+              style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
         }}
@@ -266,6 +268,7 @@ function ProfileStack() {
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
+          fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
         },
       }}
@@ -274,11 +277,10 @@ function ProfileStack() {
         name="ProfileMain"
         component={ProfileScreen}
         options={{
-          title: 'Profile',
-          headerLeft: () => (
+          headerTitle: () => (
             <Image
               source={require('./assets/produck-logo-transparent.png')}
-              style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
+              style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
         }}
@@ -450,6 +452,20 @@ function AppContent() {
 }
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_600SemiBold,
+    Poppins_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2ECD8' }}>
+        <ActivityIndicator size="large" color="#F2C335" />
+      </View>
+    );
+  }
+
   return (
     <AuthProvider>
       <AppContent />
