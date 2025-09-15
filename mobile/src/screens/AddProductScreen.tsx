@@ -337,14 +337,19 @@ export default function AddProductScreen() {
       // Show loading while fetching product info
       Alert.alert('Looking up...', 'Searching for product information...');
 
-      // Call go-upc.com API to get product name
+      // Call go-upc.com API to get product name and image
       const productInfo = await apiService.lookupUPC(manualUpc.trim());
 
       // Update the product name field and store UPC
       setName(productInfo.name);
       setScannedUpc(manualUpc.trim());
 
-      Alert.alert('Success', `Found: ${productInfo.name}`, [
+      // Add product image to images array if available
+      if (productInfo.imageUrl) {
+        setImages(prev => [productInfo.imageUrl!, ...prev]);
+      }
+
+      Alert.alert('Success', `Found: ${productInfo.name}${productInfo.imageUrl ? ' (with image)' : ''}`, [
         { text: 'OK' }
       ]);
 

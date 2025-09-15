@@ -5,6 +5,8 @@ const API_BASE_URL = __DEV__
   ? 'http://192.168.1.165:3000' // Replace with your computer's actual IP
   : 'https://your-production-api.com'; // For production
 
+const GO_UPC_API_KEY = 'c65a251906e9c97cb5edd140db5285afa0e0cdbb7cd75c74b09a049700bdb373';
+
 // Helper function to convert relative URLs to full URLs
 export const getFullImageUrl = (relativeUrl: string): string => {
   if (relativeUrl.startsWith('http')) {
@@ -216,31 +218,44 @@ class ApiService {
   }
 
   // UPC Lookup
-  async lookupUPC(upc: string): Promise<{ name: string; upc: string }> {
+  async lookupUPC(upc: string): Promise<{ name: string; upc: string; imageUrl?: string }> {
     try {
-      // Using go-upc.com API
-      const response = await fetch(`https://go-upc.com/api/v1/code/${upc}`, {
+      // Using go-upc.com API with provided API key
+      const response = await fetch(`https://go-upc.com/api/v1/code/${upc}?key=${GO_UPC_API_KEY}`, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('API key authentication failed');
+        } else if (response.status === 404) {
+          throw new Error('Product not found in database');
+        } else if (response.status === 429) {
+          throw new Error('Rate limit exceeded. Please try again later');
+        }
         throw new Error(`UPC lookup failed: ${response.status}`);
       }
 
       const data = await response.json();
-
-      // Extract product name from the response
-      // The exact structure depends on go-upc.com API response format
-      const productName = data.product?.name || data.name || data.title || 'Unknown Product';
+      const productName = data.product?.name || 'Unknown Product';
+      const imageUrl = data.product?.imageUrl || undefined;
 
       return {
         name: productName,
-        upc: upc
+        upc: upc,
+        imageUrl: imageUrl
       };
+      
     } catch (error) {
       console.error('UPC lookup error:', error);
+      
+      // Re-throw with more specific error messages
+      if (error instanceof Error) {
+        throw error;
+      }
+      
       throw new Error('Failed to lookup product information');
     }
   }
