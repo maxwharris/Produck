@@ -19,7 +19,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { apiService, Category, Product, getFullImageUrl } from '../services/api';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function EditProductScreen() {
   const navigation = useNavigation();
@@ -382,23 +381,13 @@ export default function EditProductScreen() {
 
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Purchase Date *</Text>
-            <TouchableOpacity
+            <TextInput
               style={styles.input}
-              onPress={() => setShowDatePicker(true)}
-            >
-              <Text style={styles.dateText}>
-                {purchaseDate.toLocaleDateString()}
-              </Text>
-            </TouchableOpacity>
-            {showDatePicker && (
-              <DateTimePicker
-                value={purchaseDate}
-                mode="date"
-                display="default"
-                onChange={onDateChange}
-                maximumDate={new Date()}
-              />
-            )}
+              value={purchaseDate.toISOString().split('T')[0]}
+              onChangeText={(text) => setPurchaseDate(new Date(text))}
+              placeholder="YYYY-MM-DD"
+              keyboardType="numeric"
+            />
           </View>
 
           <View style={styles.inputContainer}>

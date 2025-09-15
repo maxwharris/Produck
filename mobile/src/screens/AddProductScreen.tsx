@@ -19,7 +19,6 @@ import { useAuth } from '../contexts/AuthContext';
 import { apiService, Category } from '../services/api';
 import * as ImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function AddProductScreen() {
   const navigation = useNavigation();
@@ -37,12 +36,15 @@ export default function AddProductScreen() {
   const [rating, setRating] = useState('');
   const [blurb, setBlurb] = useState('');
   const [timeUsed, setTimeUsed] = useState('');
+  const [scannedUpc, setScannedUpc] = useState<string>('');
 
   // Date picker state
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   // Modal state
   const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showUpcModal, setShowUpcModal] = useState(false);
+  const [manualUpc, setManualUpc] = useState('');
   const [newCategoryName, setNewCategoryName] = useState('');
   const [newCategoryColor, setNewCategoryColor] = useState('#F59E0B');
 
@@ -280,6 +282,7 @@ export default function AddProductScreen() {
         blurb,
         timeUsed,
         photos: uploadedPhotoUrls,
+        upc: scannedUpc || undefined,
         userId: user.id,
       };
 
@@ -321,6 +324,39 @@ export default function AddProductScreen() {
         ))}
       </View>
     );
+  };
+
+  // Manual UPC lookup function
+  const handleManualUpcLookup = async () => {
+    if (!manualUpc.trim()) {
+      Alert.alert('Error', 'Please enter a UPC code');
+      return;
+    }
+
+    try {
+      // Show loading while fetching product info
+      Alert.alert('Looking up...', 'Searching for product information...');
+
+      // Call go-upc.com API to get product name
+      const productInfo = await apiService.lookupUPC(manualUpc.trim());
+
+      // Update the product name field and store UPC
+      setName(productInfo.name);
+      setScannedUpc(manualUpc.trim());
+
+      Alert.alert('Success', `Found: ${productInfo.name}`, [
+        { text: 'OK' }
+      ]);
+
+      // Close the modal and clear input
+      setShowUpcModal(false);
+      setManualUpc('');
+    } catch (error) {
+      console.error('UPC lookup error:', error);
+      Alert.alert('Product Not Found', 'Could not find product information for this UPC code. You can still enter the product name manually.', [
+        { text: 'OK' }
+      ]);
+    }
   };
 
   return (
@@ -374,12 +410,21 @@ export default function AddProductScreen() {
           </View>
 
           <View style={styles.inputContainer}>
-            <Text style={styles.label}>Product Name *</Text>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Product Name *</Text>
+              <TouchableOpacity
+                style={styles.scanButton}
+                onPress={() => setShowUpcModal(true)}
+              >
+                <Ionicons name="barcode-outline" size={20} color="#F59E0B" />
+                <Text style={styles.scanButtonText}>UPC</Text>
+              </TouchableOpacity>
+            </View>
             <TextInput
               style={styles.input}
               value={name}
               onChangeText={setName}
-              placeholder="Enter product name"
+              placeholder="Enter product name or scan barcode"
               autoCorrect={false}
             />
           </View>
@@ -426,23 +471,13 @@ export default function AddProductScreen() {
 
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Purchase Date *</Text>
-            <TouchableOpacity
+            <TextInput
               style={styles.input}
-              onPress={() => setShowDatePicker(true)}
-            >
-              <Text style={styles.dateText}>
-                {purchaseDate.toLocaleDateString()}
-              </Text>
-            </TouchableOpacity>
-            {showDatePicker && (
-              <DateTimePicker
-                value={purchaseDate}
-                mode="date"
-                display="default"
-                onChange={onDateChange}
-                maximumDate={new Date()}
-              />
-            )}
+              value={purchaseDate.toISOString().split('T')[0]}
+              onChangeText={(text) => setPurchaseDate(new Date(text))}
+              placeholder="YYYY-MM-DD"
+              keyboardType="numeric"
+            />
           </View>
 
           <View style={styles.inputContainer}>
@@ -551,6 +586,51 @@ export default function AddProductScreen() {
           </View>
         </View>
       </Modal>
+
+      {/* Manual UPC Input Modal */}
+      <Modal
+        visible={showUpcModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowUpcModal(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Enter UPC Code</Text>
+
+            <TextInput
+              style={styles.modalInput}
+              value={manualUpc}
+              onChangeText={setManualUpc}
+              placeholder="Enter UPC/barcode number"
+              keyboardType="numeric"
+              autoCorrect={false}
+            />
+
+            <Text style={styles.upcHint}>
+              Enter the barcode number found on the product packaging
+            </Text>
+
+            <View style={styles.modalButtons}>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.modalCancelButton]}
+                onPress={() => {
+                  setShowUpcModal(false);
+                  setManualUpc('');
+                }}
+              >
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.createButton]}
+                onPress={handleManualUpcLookup}
+              >
+                <Text style={styles.createButtonText}>Lookup</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 }
@@ -596,12 +676,33 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginBottom: 20,
   },
+  inputRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
   label: {
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#374151',
-    marginBottom: 8,
+  },
+  scanButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FEF3C7',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#F59E0B',
+  },
+  scanButtonText: {
+    fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
+    color: '#F59E0B',
+    marginLeft: 4,
   },
   input: {
     borderWidth: 1,
@@ -810,5 +911,99 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
+  },
+  upcHint: {
+    fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
+    color: '#6b7280',
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  scannerContainer: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+  scannerOverlay: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    justifyContent: 'space-between',
+    padding: 20,
+  },
+  scannerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 40,
+  },
+  closeScannerButton: {
+    padding: 10,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderRadius: 20,
+  },
+  scannerTitle: {
+    fontSize: 20,
+    fontFamily: 'Poppins_700Bold',
+    color: '#fff',
+    textAlign: 'center',
+    flex: 1,
+  },
+  scannerFrame: {
+    width: 250,
+    height: 150,
+    alignSelf: 'center',
+    position: 'relative',
+  },
+  scannerCornerTopLeft: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: 30,
+    height: 30,
+    borderTopWidth: 4,
+    borderLeftWidth: 4,
+    borderColor: '#fff',
+    borderTopLeftRadius: 10,
+  },
+  scannerCornerTopRight: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 30,
+    height: 30,
+    borderTopWidth: 4,
+    borderRightWidth: 4,
+    borderColor: '#fff',
+    borderTopRightRadius: 10,
+  },
+  scannerCornerBottomLeft: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: 30,
+    height: 30,
+    borderBottomWidth: 4,
+    borderLeftWidth: 4,
+    borderColor: '#fff',
+    borderBottomLeftRadius: 10,
+  },
+  scannerCornerBottomRight: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 30,
+    height: 30,
+    borderBottomWidth: 4,
+    borderRightWidth: 4,
+    borderColor: '#fff',
+    borderBottomRightRadius: 10,
+  },
+  scannerInstructions: {
+    fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
+    color: '#fff',
+    textAlign: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    padding: 15,
+    borderRadius: 10,
   },
 });

@@ -22,6 +22,7 @@ export interface Product {
   purchaseDate: string;
   cost: number;
   description?: string;
+  upc?: string;
   userId: {
     _id: string;
     name: string;
@@ -90,6 +91,7 @@ class ApiService {
     purchaseDate: string;
     cost: number;
     description?: string;
+    upc?: string;
     rating: number;
     blurb: string;
     photos: string[];
@@ -211,6 +213,36 @@ class ApiService {
       method: 'PUT',
       body: JSON.stringify(body),
     });
+  }
+
+  // UPC Lookup
+  async lookupUPC(upc: string): Promise<{ name: string; upc: string }> {
+    try {
+      // Using go-upc.com API
+      const response = await fetch(`https://go-upc.com/api/v1/code/${upc}`, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`UPC lookup failed: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Extract product name from the response
+      // The exact structure depends on go-upc.com API response format
+      const productName = data.product?.name || data.name || data.title || 'Unknown Product';
+
+      return {
+        name: productName,
+        upc: upc
+      };
+    } catch (error) {
+      console.error('UPC lookup error:', error);
+      throw new Error('Failed to lookup product information');
+    }
   }
 }
 
