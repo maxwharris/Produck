@@ -53,7 +53,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../../assets/produck-logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/produck-logo-transparent.png')} style={styles.logo} />
         <Text style={styles.subtitle}>Discover amazing products shared by the community</Text>
       </View>
 
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#6366F1',
+    backgroundColor: '#F2C335',
     alignItems: 'center',
   },
   logo: {

@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useAuth } from '../contexts/AuthContext';
@@ -72,6 +73,7 @@ export default function RegisterScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
+          <Image source={require('../../assets/produck-logo-transparent.png')} style={styles.logo} />
           <Text style={styles.title}>Create Account</Text>
           <Text style={styles.subtitle}>Join the Product Social community</Text>
         </View>
@@ -165,6 +167,12 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     marginBottom: 40,
+  },
+  logo: {
+    width: 150,
+    height: 45,
+    resizeMode: 'contain',
+    marginBottom: 16,
   },
   title: {
     fontSize: 32,

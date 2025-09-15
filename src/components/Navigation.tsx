@@ -29,7 +29,7 @@ export function Navigation() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <img
-                src="/produck-logo.png"
+                src="/produck-logo-transparent.png"
                 alt="Produck"
                 className="h-8 w-auto"
               />
@@ -51,7 +51,7 @@ export function Navigation() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
               <img
-                src="/produck-logo.png"
+                src="/produck-logo-transparent.png"
                 alt="Produck"
                 className="h-8 w-auto"
               />

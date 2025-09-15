@@ -30,8 +30,8 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
               onPress={onPress}
               style={styles.tab}
             >
-              {options.tabBarIcon && options.tabBarIcon({ focused: isFocused, color: isFocused ? '#6366F1' : '#64748B', size: 20 })}
-              <Text style={[styles.tabLabel, { color: isFocused ? '#6366F1' : '#64748B' }]}>
+              {options.tabBarIcon && options.tabBarIcon({ focused: isFocused, color: isFocused ? '#F2B035' : '#D9A362', size: 20 })}
+              <Text style={[styles.tabLabel, { color: isFocused ? '#F2B035' : '#D9A362' }]}>
                 {typeof label === 'string' ? label : ''}
               </Text>
             </TouchableOpacity>
@@ -73,8 +73,8 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
               onPress={onPress}
               style={styles.tab}
             >
-              {options.tabBarIcon && options.tabBarIcon({ focused: isFocused, color: isFocused ? '#6366F1' : '#64748B', size: 20 })}
-              <Text style={[styles.tabLabel, { color: isFocused ? '#6366F1' : '#64748B' }]}>
+              {options.tabBarIcon && options.tabBarIcon({ focused: isFocused, color: isFocused ? '#F2B035' : '#D9A362', size: 20 })}
+              <Text style={[styles.tabLabel, { color: isFocused ? '#F2B035' : '#D9A362' }]}>
                 {typeof label === 'string' ? label : ''}
               </Text>
             </TouchableOpacity>
@@ -88,14 +88,14 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: '#FEF3C7',
+    backgroundColor: '#F2ECD8',
     height: 80,
     paddingBottom: 10,
     paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'space-around',
     borderTopWidth: 1,
-    borderTopColor: '#6366F1',
+    borderTopColor: '#F2C335',
   },
   tabContainer: {
     flexDirection: 'row',

@@ -28,9 +28,9 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#6366F1', // Modern indigo theme
+          backgroundColor: '#F2C335', // Golden yellow theme
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -55,9 +55,9 @@ function HomeStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#6366F1', // Modern indigo theme
+          backgroundColor: '#F2C335', // Golden yellow theme
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -92,9 +92,9 @@ function DiscoverStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#6366F1', // Modern indigo theme
+          backgroundColor: '#F2C335', // Golden yellow theme
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -129,9 +129,9 @@ function SearchStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#6366F1', // Modern indigo theme
+          backgroundColor: '#F2C335', // Golden yellow theme
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -166,9 +166,9 @@ function ProfileStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#6366F1', // Modern indigo theme
+          backgroundColor: '#F2C335', // Golden yellow theme
         },
-        headerTintColor: '#fff',
+        headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontWeight: 'bold',
         },
@@ -275,8 +275,8 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#EEF2FF' }}>
-        <ActivityIndicator size="large" color="#6366F1" />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2ECD8' }}>
+        <ActivityIndicator size="large" color="#F2C335" />
       </View>
     );
   }
