@@ -28,7 +28,7 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
+          backgroundColor: '#6366F1', // Modern indigo theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -55,7 +55,7 @@ function HomeStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#F59E0B', // Yellow/amber for rubber duck theme
+          backgroundColor: '#6366F1', // Modern indigo theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -92,7 +92,7 @@ function DiscoverStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
+          backgroundColor: '#6366F1', // Modern indigo theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -129,7 +129,7 @@ function SearchStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
+          backgroundColor: '#6366F1', // Modern indigo theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -166,7 +166,7 @@ function ProfileStack() {
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#F59E0B', // Yellow for rubber duck theme
+          backgroundColor: '#6366F1', // Modern indigo theme
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -275,8 +275,8 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FEF3C7' }}>
-        <ActivityIndicator size="large" color="#F59E0B" />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#EEF2FF' }}>
+        <ActivityIndicator size="large" color="#6366F1" />
       </View>
     );
   }

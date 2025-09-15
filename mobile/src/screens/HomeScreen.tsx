@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   RefreshControl,
+  Image,
 } from 'react-native';
 import ProductCard from '../components/ProductCard';
 import { apiService, Product } from '../services/api';
@@ -52,7 +53,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Product Social</Text>
+        <Image source={require('../assets/produck-logo.png')} style={styles.logo} />
         <Text style={styles.subtitle}>Discover amazing products shared by the community</Text>
       </View>
 
@@ -97,7 +98,14 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#6366F1',
+    alignItems: 'center',
+  },
+  logo: {
+    width: 200,
+    height: 60,
+    resizeMode: 'contain',
+    marginBottom: 8,
   },
   title: {
     fontSize: 28,

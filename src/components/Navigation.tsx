@@ -26,11 +26,15 @@ export function Navigation() {
       <nav className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link href="/" className="text-xl font-bold text-gray-900">
-                Product Social
-              </Link>
-            </div>
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
+              <img
+                src="/produck-logo.png"
+                alt="Produck"
+                className="h-8 w-auto"
+              />
+            </Link>
+          </div>
             <div className="flex items-center">
               <div className="animate-pulse bg-gray-200 h-8 w-20 rounded"></div>
             </div>
@@ -45,8 +49,12 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900">
-              Product Social
+            <Link href="/" className="flex items-center">
+              <img
+                src="/produck-logo.png"
+                alt="Produck"
+                className="h-8 w-auto"
+              />
             </Link>
           </div>
 
