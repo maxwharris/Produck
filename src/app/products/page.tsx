@@ -87,7 +87,7 @@ export default function ProductsPage() {
         {session?.user && (
           <Link
             href="/manage"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-produck-blue text-white px-4 py-2 rounded hover:bg-blue-600"
           >
             Manage My Products
           </Link>
@@ -101,7 +101,7 @@ export default function ProductsPage() {
             onClick={() => setSelectedCategory('')}
             className={`px-4 py-2 rounded-full text-sm font-medium ${
               selectedCategory === ''
-                ? 'bg-blue-500 text-white'
+                ? 'bg-produck-blue text-white'
                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
             }`}
           >
@@ -144,7 +144,7 @@ export default function ProductsPage() {
           {session?.user && (
             <Link
               href="/manage"
-              className="bg-blue-500 text-white px-6 py-3 rounded hover:bg-blue-600"
+              className="bg-produck-blue text-white px-6 py-3 rounded hover:bg-produck-blue"
             >
               Share Your First Product
             </Link>

@@ -103,7 +103,7 @@ export default function ManagePage() {
           onClick={() => setActiveTab('categories')}
           className={`px-6 py-3 font-medium text-sm ${
             activeTab === 'categories'
-              ? 'border-b-2 border-blue-500 text-blue-600'
+              ? 'border-b-2 border-orange-500 text-orange-600'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -113,7 +113,7 @@ export default function ManagePage() {
           onClick={() => setActiveTab('products')}
           className={`px-6 py-3 font-medium text-sm ${
             activeTab === 'products'
-              ? 'border-b-2 border-blue-500 text-blue-600'
+              ? 'border-b-2 border-orange-500 text-orange-600'
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
@@ -128,7 +128,7 @@ export default function ManagePage() {
             <h2 className="text-2xl font-bold">My Categories</h2>
             <button
               onClick={() => setShowAddCategoryForm(true)}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-produck-blue text-white px-4 py-2 rounded hover:bg-produck-blue"
             >
               Add Category
             </button>
@@ -176,7 +176,7 @@ export default function ManagePage() {
             <h2 className="text-2xl font-bold">My Products</h2>
             <button
               onClick={() => setShowAddProductForm(true)}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-produck-blue text-white px-4 py-2 rounded hover:bg-produck-blue"
             >
               Add Product
             </button>

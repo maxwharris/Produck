@@ -30,15 +30,12 @@ function AuthStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
+          height: 100, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
-        },
-        headerTitleContainerStyle: {
-          paddingTop: 20,
-          paddingBottom: 10,
         },
       }}
     >
@@ -62,15 +59,12 @@ function HomeStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
+          height: 100, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
-        },
-        headerTitleContainerStyle: {
-          paddingTop: 20,
-          paddingBottom: 10,
         },
       }}
     >
@@ -136,15 +130,12 @@ function DiscoverStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
+          height: 100, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
-        },
-        headerTitleContainerStyle: {
-          paddingTop: 20,
-          paddingBottom: 10,
         },
       }}
     >
@@ -209,15 +200,12 @@ function SearchStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
+          height: 100, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
-        },
-        headerTitleContainerStyle: {
-          paddingTop: 20,
-          paddingBottom: 10,
         },
       }}
     >
@@ -282,15 +270,12 @@ function ProfileStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
+          height: 100, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
           fontFamily: 'Poppins_700Bold',
           fontWeight: 'bold',
-        },
-        headerTitleContainerStyle: {
-          paddingTop: 20,
-          paddingBottom: 10,
         },
       }}
     >
