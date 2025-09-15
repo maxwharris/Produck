@@ -334,8 +334,6 @@ export default function AddProductScreen() {
     }
 
     try {
-      // Show loading while fetching product info
-      Alert.alert('Looking up...', 'Searching for product information...');
 
       // Call go-upc.com API to get product name and image
       const productInfo = await apiService.lookupUPC(manualUpc.trim());
