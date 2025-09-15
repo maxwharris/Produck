@@ -74,6 +74,11 @@ function HomeStack() {
         options={{ title: 'Product Details' }}
       />
       <Stack.Screen
+        name="EditProduct"
+        component={EditProductScreen}
+        options={{ title: 'Edit Produck' }}
+      />
+      <Stack.Screen
         name="UserProfile"
         component={UserProfileScreen}
         options={{ title: 'User Profile' }}
@@ -106,6 +111,11 @@ function DiscoverStack() {
         options={{ title: 'Product Details' }}
       />
       <Stack.Screen
+        name="EditProduct"
+        component={EditProductScreen}
+        options={{ title: 'Edit Produck' }}
+      />
+      <Stack.Screen
         name="UserProfile"
         component={UserProfileScreen}
         options={{ title: 'User Profile' }}
@@ -136,6 +146,11 @@ function SearchStack() {
         name="ProductDetail"
         component={ProductDetailScreen}
         options={{ title: 'Product Details' }}
+      />
+      <Stack.Screen
+        name="EditProduct"
+        component={EditProductScreen}
+        options={{ title: 'Edit Produck' }}
       />
       <Stack.Screen
         name="UserProfile"
