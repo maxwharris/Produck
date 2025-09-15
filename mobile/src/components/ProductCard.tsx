@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
   placeholderText: {
     color: '#9ca3af',
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
   },
   content: {
     padding: 16,
@@ -185,6 +186,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 8,
@@ -194,6 +196,7 @@ const styles = StyleSheet.create({
   },
   userText: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#3b82f6',
     textDecorationLine: 'underline',
   },
@@ -214,16 +217,19 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
   },
   price: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 8,
   },
   description: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     lineHeight: 20,
     marginBottom: 12,
@@ -231,6 +237,7 @@ const styles = StyleSheet.create({
   },
   viewDetails: {
     fontSize: 14,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#3b82f6',
     fontWeight: '500',
   },

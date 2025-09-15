@@ -230,6 +230,7 @@ const styles = StyleSheet.create({
   placeholderText: {
     color: '#9ca3af',
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
   },
   content: {
     padding: 20,
@@ -242,6 +243,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#111827',
     flex: 1,
@@ -279,6 +281,7 @@ const styles = StyleSheet.create({
   },
   userText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#3b82f6',
     textDecorationLine: 'underline',
   },
@@ -299,6 +302,7 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
   },
   detailsContainer: {
@@ -306,16 +310,19 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 28,
+    fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#111827',
     marginBottom: 12,
   },
   detailText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#374151',
     marginBottom: 8,
   },
   detailLabel: {
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
   },
   descriptionContainer: {
@@ -323,12 +330,14 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 20,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '600',
     color: '#111827',
     marginBottom: 12,
   },
   description: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#4b5563',
     lineHeight: 24,
   },
@@ -337,22 +346,26 @@ const styles = StyleSheet.create({
   },
   reviewText: {
     fontSize: 16,
+    fontFamily: 'Poppins_400Regular',
     color: '#4b5563',
     lineHeight: 24,
     marginBottom: 16,
   },
   reviewMeta: {
     fontSize: 14,
+    fontFamily: 'Poppins_400Regular',
     color: '#6b7280',
     marginBottom: 4,
   },
   errorText: {
     fontSize: 18,
+    fontFamily: 'Poppins_400Regular',
     color: '#ef4444',
     marginBottom: 16,
   },
   backText: {
     fontSize: 16,
+    fontFamily: 'Poppins_600SemiBold',
     color: '#3b82f6',
   },
 });

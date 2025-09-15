@@ -89,9 +89,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     backgroundColor: '#F2ECD8',
-    height: 80,
-    paddingBottom: 10,
-    paddingTop: 10,
+    height: 90,
+    paddingBottom: 20,
+    paddingTop: 20,
     alignItems: 'center',
     justifyContent: 'space-around',
     borderTopWidth: 1,
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
   },
   tabLabel: {
     fontSize: 12,
+    fontFamily: 'Poppins_600SemiBold',
     fontWeight: '500',
     marginTop: 2,
   },

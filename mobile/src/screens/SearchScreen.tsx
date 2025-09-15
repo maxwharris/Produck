@@ -194,13 +194,13 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
-    color: '#e0e7ff',
+    color: '#fff',
   },
   searchContainer: {
     padding: 20,

@@ -219,19 +219,19 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#F2C335',
+    color: '#402A1D',
   },
   userName: {
     fontSize: 24,
     fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 4,
   },
   userEmail: {
     fontSize: 16,
     fontFamily: 'Poppins_400Regular',
-    color: '#e0e7ff',
+    color: '#402A1D',
     marginBottom: 20,
   },
   statsContainer: {
@@ -246,12 +246,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
   },
   statLabel: {
     fontSize: 12,
     fontFamily: 'Poppins_400Regular',
-    color: '#e0e7ff',
+    color: '#402A1D',
     marginTop: 2,
   },
   menuContainer: {

@@ -111,13 +111,13 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
-    color: '#fff',
+    color: '#402A1D',
     marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
     fontFamily: 'Poppins_400Regular',
-    color: '#e0e7ff',
+    color: '#fff',
     lineHeight: 24,
   },
   sectionHeader: {

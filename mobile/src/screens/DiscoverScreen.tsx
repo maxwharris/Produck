@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 14,
     fontFamily: 'Poppins_400Regular',
-    color: '#e0e7ff',
+    color: '#fff',
   },
   categoryContainer: {
     backgroundColor: '#fff',
