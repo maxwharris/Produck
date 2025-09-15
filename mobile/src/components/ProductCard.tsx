@@ -81,7 +81,7 @@ export default function ProductCard({ product, onProductDeleted, onProductUpdate
 
         {/* User Info */}
         <TouchableOpacity onPress={handleUserPress} style={styles.userContainer}>
-          <Text style={styles.userText}>by {product.userId.name}</Text>
+          <Text style={styles.userText}>{product.userId.name}</Text>
         </TouchableOpacity>
 
         {/* Star Rating */}
@@ -100,13 +100,6 @@ export default function ProductCard({ product, onProductDeleted, onProductUpdate
 
         <Text style={styles.price}>${product.cost}</Text>
 
-        {product.description && (
-          <Text style={styles.description} numberOfLines={2}>
-            {product.description}
-          </Text>
-        )}
-
-        <Text style={styles.viewDetails}>View Details</Text>
       </View>
     </TouchableOpacity>
   );
@@ -116,7 +109,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     borderRadius: 12,
-    margin: 8,
+    marginTop: 8,
+    marginLeft: 8,
+    marginRight: 8,
+    marginBottom: 16,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

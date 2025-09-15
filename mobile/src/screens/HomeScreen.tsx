@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
   header: {
     padding: 20,
     backgroundColor: '#F2C335',
-    alignItems: 'center',
   },
   logo: {
     width: 200,
@@ -108,17 +107,16 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   title: {
-    fontSize: 28,
+    fontSize: 24,
     fontFamily: 'Poppins_700Bold',
     fontWeight: 'bold',
     color: '#402A1D',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Poppins_400Regular',
     color: '#fff',
-    lineHeight: 24,
   },
   sectionHeader: {
     flexDirection: 'row',

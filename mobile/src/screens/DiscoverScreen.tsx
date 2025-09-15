@@ -100,7 +100,7 @@ export default function DiscoverScreen() {
           <TouchableOpacity
             style={[
               styles.categoryButton,
-              selectedCategory === '' && { backgroundColor: '#3b82f6' }
+              selectedCategory === '' && { backgroundColor: 'orange' }
             ]}
             onPress={() => setSelectedCategory('')}
           >

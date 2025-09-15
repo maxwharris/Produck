@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
   header: {
     padding: 20,
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F59E0B',
   },
   title: {
     fontSize: 24,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   addButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F59E0B',
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   emptyButton: {
-    backgroundColor: '#3b82f6',
+    backgroundColor: '#F59E0B',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,

@@ -30,7 +30,7 @@ function AuthStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
-          height: 100, // Increased height to accommodate content
+          height: 110, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -65,7 +65,7 @@ function HomeStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
-          height: 100, // Increased height to accommodate content
+          height: 110, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -140,7 +140,7 @@ function DiscoverStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
-          height: 100, // Increased height to accommodate content
+          height: 110, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -214,7 +214,7 @@ function SearchStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
-          height: 100, // Increased height to accommodate content
+          height: 110, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
@@ -288,7 +288,7 @@ function ProfileStack() {
       screenOptions={{
         headerStyle: {
           backgroundColor: '#F2C335', // Golden yellow theme
-          height: 100, // Increased height to accommodate content
+          height: 110, // Increased height to accommodate content
         },
         headerTintColor: '#402A1D',
         headerTitleStyle: {
