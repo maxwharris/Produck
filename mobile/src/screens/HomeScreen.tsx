@@ -53,7 +53,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../assets/produck-logo.png')} style={styles.logo} />
+        <Image source={require('../../assets/produck-logo.png')} style={styles.logo} />
         <Text style={styles.subtitle}>Discover amazing products shared by the community</Text>
       </View>
 
