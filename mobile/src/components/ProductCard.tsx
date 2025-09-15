@@ -6,10 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions,
-  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from '../contexts/AuthContext';
 import { apiService, getFullImageUrl, Product, Review } from '../services/api';
 
 interface ProductCardProps {
@@ -21,7 +19,6 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, onProductDeleted, onProductUpdated, navigation: navProp }: ProductCardProps) {
   const navigation = navProp || useNavigation();
-  const { user } = useAuth();
   const [review, setReview] = useState<Review | null>(null);
 
   // Calculate card width for two cards side by side
@@ -54,104 +51,64 @@ export default function ProductCard({ product, onProductDeleted, onProductUpdate
     (navigation as any).navigate('UserProfile', { userId: product.userId._id });
   };
 
-  const handleEdit = () => {
-    // Navigate to edit screen with product data
-    (navigation as any).navigate('EditProduct', { product });
-  };
 
-  const handleDelete = () => {
-    Alert.alert(
-      'Delete Product',
-      'Are you sure you want to delete this product? This action cannot be undone.',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await apiService.deleteProduct(product._id, user?.id);
-              Alert.alert('Success', 'Product deleted successfully');
-              onProductDeleted?.();
-            } catch (error) {
-              console.error('Error deleting product:', error);
-              Alert.alert('Error', 'Failed to delete product');
-            }
-          },
-        },
-      ]
-    );
-  };
-
-  const isOwner = user && user.id === product.userId._id;
 
   return (
-    <View style={[styles.container, { width: cardWidth, height: cardHeight }]}>
-      {/* Owner Actions */}
-      {isOwner && (
-        <View style={styles.ownerActions}>
-          <TouchableOpacity style={styles.editButton} onPress={handleEdit}>
-            <Text style={styles.editButtonText}>✏️</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
-            <Text style={styles.deleteButtonText}>🗑️</Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
-      <TouchableOpacity style={styles.cardContent} onPress={handlePress}>
-        {/* Product Image */}
-        <View style={[styles.imageContainer, { height: cardHeight * 0.5 }]}>
-          {review?.photos && review.photos.length > 0 ? (
-            <Image
-              source={{ uri: getFullImageUrl(review.photos[0]) }}
-              style={styles.image}
-              resizeMode="cover"
-            />
-          ) : (
-            <View style={styles.placeholderContainer}>
-              <Text style={styles.placeholderText}>No image</Text>
-            </View>
-          )}
-        </View>
-
-        {/* Product Info */}
-        <View style={styles.content}>
-          <Text style={styles.title} numberOfLines={1}>
-            {product.name}
-          </Text>
-
-          {/* User Info */}
-          <TouchableOpacity onPress={handleUserPress} style={styles.userContainer}>
-            <Text style={styles.userText}>by {product.userId.name}</Text>
-          </TouchableOpacity>
-
-          {/* Star Rating */}
-          <View style={styles.ratingContainer}>
-            <Text style={styles.stars}>
-              {[...Array(5)].map((_, i) => (
-                <Text key={i} style={review && i < review.rating ? styles.starFilled : styles.starEmpty}>
-                  ★
-                </Text>
-              ))}
-            </Text>
-            {review && (
-              <Text style={styles.ratingText}>({review.rating}/5)</Text>
-            )}
+    <TouchableOpacity
+      style={[styles.container, { width: cardWidth, height: cardHeight }]}
+      onPress={handlePress}
+    >
+      {/* Product Image */}
+      <View style={[styles.imageContainer, { height: cardHeight * 0.5 }]}>
+        {review?.photos && review.photos.length > 0 ? (
+          <Image
+            source={{ uri: getFullImageUrl(review.photos[0]) }}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        ) : (
+          <View style={styles.placeholderContainer}>
+            <Text style={styles.placeholderText}>No image</Text>
           </View>
+        )}
+      </View>
 
-          <Text style={styles.price}>${product.cost}</Text>
+      {/* Product Info */}
+      <View style={styles.content}>
+        <Text style={styles.title} numberOfLines={1}>
+          {product.name}
+        </Text>
 
-          {product.description && (
-            <Text style={styles.description} numberOfLines={2}>
-              {product.description}
-            </Text>
+        {/* User Info */}
+        <TouchableOpacity onPress={handleUserPress} style={styles.userContainer}>
+          <Text style={styles.userText}>by {product.userId.name}</Text>
+        </TouchableOpacity>
+
+        {/* Star Rating */}
+        <View style={styles.ratingContainer}>
+          <Text style={styles.stars}>
+            {[...Array(5)].map((_, i) => (
+              <Text key={i} style={review && i < review.rating ? styles.starFilled : styles.starEmpty}>
+                ★
+              </Text>
+            ))}
+          </Text>
+          {review && (
+            <Text style={styles.ratingText}>({review.rating}/5)</Text>
           )}
-
-          <Text style={styles.viewDetails}>View Details</Text>
         </View>
-      </TouchableOpacity>
-    </View>
+
+        <Text style={styles.price}>${product.cost}</Text>
+
+        {product.description && (
+          <Text style={styles.description} numberOfLines={2}>
+            {product.description}
+          </Text>
+        )}
+
+        <Text style={styles.viewDetails}>View Details</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 

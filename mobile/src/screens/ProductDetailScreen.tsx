@@ -7,13 +7,16 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext';
 import { apiService, getFullImageUrl, Product, Review } from '../services/api';
 
 export default function ProductDetailScreen() {
   const route = useRoute();
   const navigation = useNavigation();
+  const { user } = useAuth();
   const { productId } = route.params as { productId: string };
 
   const [product, setProduct] = useState<Product | null>(null);
@@ -48,6 +51,44 @@ export default function ProductDetailScreen() {
       (navigation as any).navigate('UserProfile', { userId: product.userId._id });
     }
   };
+
+  const handleEdit = () => {
+    if (product) {
+      (navigation as any).navigate('EditProduct', { product });
+    }
+  };
+
+  const handleDelete = () => {
+    if (!product) return;
+
+    Alert.alert(
+      'Delete Product',
+      'Are you sure you want to delete this product? This action cannot be undone.',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await apiService.deleteProduct(product._id, user?.id);
+              Alert.alert('Success', 'Product deleted successfully', [
+                {
+                  text: 'OK',
+                  onPress: () => navigation.goBack(),
+                },
+              ]);
+            } catch (error) {
+              console.error('Error deleting product:', error);
+              Alert.alert('Error', 'Failed to delete product');
+            }
+          },
+        },
+      ]
+    );
+  };
+
+  const isOwner = user && product && user.id === product.userId._id;
 
   if (loading) {
     return (
@@ -87,7 +128,21 @@ export default function ProductDetailScreen() {
 
       {/* Product Info */}
       <View style={styles.content}>
-        <Text style={styles.title}>{product.name}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{product.name}</Text>
+
+          {/* Owner Actions */}
+          {isOwner && (
+            <View style={styles.ownerActions}>
+              <TouchableOpacity style={styles.editButton} onPress={handleEdit}>
+                <Text style={styles.editButtonText}>✏️</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+                <Text style={styles.deleteButtonText}>🗑️</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
 
         {/* User Info */}
         <TouchableOpacity onPress={handleUserPress} style={styles.userContainer}>
@@ -179,11 +234,45 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
   },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#111827',
-    marginBottom: 12,
+    flex: 1,
+  },
+  ownerActions: {
+    flexDirection: 'row',
+    marginLeft: 12,
+  },
+  editButton: {
+    backgroundColor: '#3b82f6',
+    borderRadius: 16,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 4,
+  },
+  editButtonText: {
+    fontSize: 16,
+  },
+  deleteButton: {
+    backgroundColor: '#ef4444',
+    borderRadius: 16,
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 4,
+  },
+  deleteButtonText: {
+    fontSize: 16,
   },
   userContainer: {
     marginBottom: 16,
