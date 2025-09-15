@@ -226,7 +226,7 @@ export default function EditProductScreen() {
         purchaseDate: purchaseDateString,
       };
 
-      await apiService.updateProduct(product._id, productData);
+      await apiService.updateProduct(product._id, productData, user.id);
 
       // Update the review as well
       // Note: In a full implementation, you'd want to update the review separately

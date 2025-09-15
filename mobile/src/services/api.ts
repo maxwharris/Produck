@@ -112,10 +112,11 @@ class ApiService {
     blurb?: string;
     photos?: string[];
     timeUsed?: string;
-  }): Promise<Product> {
+  }, userId?: string): Promise<Product> {
+    const body = userId ? { ...productData, userId } : productData;
     return this.request(`/api/products/${id}`, {
       method: 'PUT',
-      body: JSON.stringify(productData),
+      body: JSON.stringify(body),
     });
   }
 
