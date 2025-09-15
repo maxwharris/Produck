@@ -28,18 +28,16 @@
         "android.permission.WRITE_EXTERNAL_STORAGE"
       ]
     },
+    "extra": {
+      "goUpcApiKey": "c65a251906e9c97cb5edd140db5285afa0e0cdbb7cd75c74b09a049700bdb373",
+      "apiBaseUrl": "http://192.168.1.165:3000"
+    },
     "plugins": [
       [
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos to let you share product images.",
           "cameraPermission": "The app accesses your camera to let you take product photos."
-        }
-      ],
-      [
-        "expo-barcode-scanner",
-        {
-          "cameraPermission": "The app accesses your camera to let you scan product barcodes."
         }
       ]
     ],

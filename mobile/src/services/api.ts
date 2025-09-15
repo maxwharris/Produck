@@ -1,11 +1,13 @@
-// Get the computer's IP address dynamically
-// For development, replace with your computer's IP address
-// You can find this in the Expo terminal output (e.g., exp://192.168.1.165:8081)
-const API_BASE_URL = __DEV__
-  ? 'http://192.168.1.165:3000' // Replace with your computer's actual IP
-  : 'https://your-production-api.com'; // For production
+// Environment variables using expo-constants
+import Constants from 'expo-constants';
 
-const GO_UPC_API_KEY = 'c65a251906e9c97cb5edd140db5285afa0e0cdbb7cd75c74b09a049700bdb373';
+// Get API configuration from environment
+const API_BASE_URL = Constants.expoConfig?.extra?.apiBaseUrl ||
+  (__DEV__ ? 'http://192.168.1.165:3000' : 'https://your-production-api.com');
+
+const GO_UPC_API_KEY = Constants.expoConfig?.extra?.goUpcApiKey ||
+  process.env.GO_UPC_API_KEY ||
+  'fallback_key_for_dev_only';
 
 // Helper function to convert relative URLs to full URLs
 export const getFullImageUrl = (relativeUrl: string): string => {
