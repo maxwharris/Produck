@@ -42,12 +42,18 @@ function AuthStack() {
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{ title: 'Sign In to Produck' }}
+        options={{ 
+          title: 'Sign In to Produck',
+          cardStyle: { paddingBottom: 20 }
+        }}
       />
       <Stack.Screen
         name="Register"
         component={RegisterScreen}
-        options={{ title: 'Join Produck' }}
+        options={{ 
+          title: 'Join Produck',
+          cardStyle: { paddingBottom: 20 }
+        }}
       />
     </Stack.Navigator>
   );
@@ -78,6 +84,7 @@ function HomeStack() {
               style={{ width: 120, height: 36, resizeMode: 'contain'}}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -91,6 +98,7 @@ function HomeStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain'}}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
   
       />
@@ -105,6 +113,7 @@ function HomeStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -118,6 +127,7 @@ function HomeStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
     </Stack.Navigator>
@@ -149,6 +159,7 @@ function DiscoverStack() {
               style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -162,6 +173,7 @@ function DiscoverStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -175,6 +187,7 @@ function DiscoverStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -188,6 +201,7 @@ function DiscoverStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
     </Stack.Navigator>
@@ -219,6 +233,7 @@ function SearchStack() {
               style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -232,6 +247,7 @@ function SearchStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -245,6 +261,7 @@ function SearchStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -258,6 +275,7 @@ function SearchStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
     </Stack.Navigator>
@@ -289,6 +307,7 @@ function ProfileStack() {
               style={{ width: 120, height: 36, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -302,6 +321,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -315,6 +335,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -328,6 +349,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -341,6 +363,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -354,6 +377,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -367,6 +391,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
       <Stack.Screen
@@ -380,6 +405,7 @@ function ProfileStack() {
               style={{ width: 80, height: 24, marginLeft: 10, resizeMode: 'contain' }}
             />
           ),
+          cardStyle: { paddingBottom: 20 }
         }}
       />
     </Stack.Navigator>
